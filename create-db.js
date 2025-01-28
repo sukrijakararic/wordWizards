@@ -1,36 +1,43 @@
 const { Client } = require("pg");
-const { DB } = require("./config")(async () => {
+const { DB } = require("./config");
+
+
+(async () => {
   // The tables will be here
 
   const usersTableStmt = `
-CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY NOT NULL,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    google_profile JSON,
-    github_profile JSON,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-`;
+    CREATE TABLE IF NOT EXISTS users (
+      id SERIAL PRIMARY KEY,
+      username VARCHAR(255) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      google_profile JSON,
+      github_profile JSON,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `;
 
-  const postsTableStmt = `CREATE TABLE IF NOT EXISTS posts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);`;
+  const postsTableStmt = `
+    CREATE TABLE IF NOT EXISTS posts (
+      id SERIAL PRIMARY KEY,
+      title VARCHAR(255) NOT NULL,
+      content TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP,
+      user_id INT,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+  `;
 
-  const commentsTableStmt = `CREATE TABLE IF NOT EXISTS comments (
-     id INT AUTO_INCREMENT PRIMARY KEY,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    post_id INT,
-    FOREIGN KEY (post_id) REFERENCES posts(id)
-);`;
+  const commentsTableStmt = `
+    CREATE TABLE IF NOT EXISTS comments (
+      id SERIAL PRIMARY KEY,
+      content TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      post_id INT,
+      FOREIGN KEY (post_id) REFERENCES posts(id)
+    );
+  `;
 
   try {
     const db = new Client({
