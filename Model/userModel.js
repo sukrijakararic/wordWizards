@@ -47,6 +47,7 @@ const registerUser = async (request, response, next) => {
     }
   };
 
+
   module.exports = {
     getUserByEmail,
     registerUser,
