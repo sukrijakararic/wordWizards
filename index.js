@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("trust proxy", 1);
 
 app.get("/", (req, res) => {
-  res.send("Hello World!, test");
+  res.send("Hello World!, test, test");
 });
 
 app.use("/api", userRouter);
