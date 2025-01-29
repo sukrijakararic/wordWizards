@@ -5,8 +5,9 @@ const session = require("express-session");
 const { PORT, SESSION_SECRET } = require("./config");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-const userRouter = require("./Controller/userController");
 const passport = require("./strategies/main");
+const userRouter = require("./Controller/userController");
+const blogsRouter = require("./Controller/blogsController");
 
 app.use(express.json());
 app.use(cors());
@@ -36,7 +37,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!, test, test");
 });
 
-app.use("/api", userRouter);
+app.use("/api", userRouter, blogsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
