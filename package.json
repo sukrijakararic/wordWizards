@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -r dotenv/config index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "create-db": "node -r dotenv/config create-db.js"
   },
   "author": "",
@@ -22,5 +22,8 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "mocha": "^11.1.0"
   }
 }
