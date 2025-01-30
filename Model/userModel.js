@@ -15,10 +15,10 @@ const getUserByEmail = async (email) => {
 
 const registerUser = async (request, response, next) => {
     // Extract the email, password, firstname, and lastname from the request body
-    const { email, password, userName } = request.body;
+    const { email, password, username } = request.body;
     const existingUser = await getUserByEmail(email);
   
-    if (!email || !password || !userName) {
+    if (!email || !password || !username) {
       response.status(400).json({ message: "All fields are required" });
       return;
     }
@@ -37,11 +37,11 @@ const registerUser = async (request, response, next) => {
       // Insert the user into the database and return the newly inserted user
       const result = await db.query(
         "INSERT INTO users (email, password, username) VALUES (LOWER($1), $2, $3) RETURNING *",
-        [email, hashedPassword, userName]
+        [email, hashedPassword, username]
       );
   
       // Return a 201 Created response with the newly inserted user
-      response.status(201).json({ message: "User created", user: userName });
+      response.status(201).json({ message: "User created", user: username });
     } catch (err) {
       console.log(err);
     }

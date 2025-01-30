@@ -17,6 +17,12 @@ const { DB } = require("./config");
     );
   `;
 
+  const userSampleData = `
+    INSERT INTO users (username, password, email)
+    VALUES 
+      ('goodBoy', '1', 'dog@email.com');
+      `;
+
   const postsTableStmt = `
     CREATE TABLE IF NOT EXISTS posts (
       id SERIAL PRIMARY KEY,
@@ -43,10 +49,7 @@ const { DB } = require("./config");
     INSERT INTO posts (title, content, user_id)
     VALUES 
       ('Lorem Ipsum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1),
-      ('Vestibulum', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.', 2),
-      ('Curabitur', 'Curabitur blandit tempus porttitor.', 2),
-      ('Vivamus', 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.', 1),
-      ('Integer', 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet.', 2);
+      ('Vestibulum', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.', 1);
   `;
 
   
@@ -68,7 +71,8 @@ const { DB } = require("./config");
     await db.query(postsTableStmt);
     await db.query(commentsTableStmt);
 
-    // Insert sample data
+    // Insert sample 
+    await db.query(userSampleData);
     await db.query(insertPostsStmt);
     
     await db.end();
