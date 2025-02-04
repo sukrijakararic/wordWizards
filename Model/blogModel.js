@@ -122,7 +122,7 @@ const deleteBlogPost = async (req, res) => {
   }
 };
 
-const giveUpDoot = async (req, res) => {
+const giveUpDootBlog = async (req, res) => {
   if (!req.user) {
     res.status(401).json({ message: "Please log in to give an updoot" });
     return;
@@ -145,11 +145,35 @@ const giveUpDoot = async (req, res) => {
   }
 };
 
+const giveDownDootBlog = async (req, res) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Please log in to give an updoot" });
+    return;
+  }
+  const { id } = req.body;
+  try {
+    const postCheck = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+    if (postCheck.rows.length === 0) {
+      res.status(404).json({ message: "Blog post not found, check spelling." });
+      return;
+    }
+
+    const result = await db.query(
+      "UPDATE posts SET updoots = updoots - 1 WHERE id = $1 RETURNING *",
+      [id]
+    );
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   getAllBlogs,
   getMyBlogs,
   createBlog,
   updateBlogPost,
   deleteBlogPost,
-  giveUpDoot,
+  giveUpDootBlog,
+  giveDownDootBlog,
 };

@@ -32,6 +32,7 @@ const { DB } = require("./config");
       updated_at TIMESTAMP,
       user_id INT,
       updoots INT,
+      downDoots INT,
       FOREIGN KEY (user_id) REFERENCES users(id)
     );
   `;
@@ -44,6 +45,7 @@ const { DB } = require("./config");
       post_id INT,
       user_id INT,
       updoots INT,
+      downDoots INT,
       FOREIGN KEY (user_id) REFERENCES users(id),
       FOREIGN KEY (post_id) REFERENCES posts(id)
     );
