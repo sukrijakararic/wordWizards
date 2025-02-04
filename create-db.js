@@ -31,6 +31,7 @@ const { DB } = require("./config");
       updated_at TIMESTAMP,
       user_id INT,
       updoots INT DEFAULT 0,
+      tags text[],
       FOREIGN KEY (user_id) REFERENCES users(id)
     );
   `;
