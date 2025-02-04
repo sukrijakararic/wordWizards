@@ -179,6 +179,53 @@ const giveDownDootBlog = async (req, res) => {
   }
 };
 
+
+// In the request body for tags, be sure to use curly braces to surround the tags in the JSON. For ex, {tags: "{tag1", "tag2}"}
+const addTagToBlog = async (req, res) => {
+  if (!req.user) { 
+    res.status(401).json({ message: "Please log in to add a tag" });
+    return;
+  }
+  const { id, tags } = req.body;
+  try {
+    const postCheck = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+    if (postCheck.rows.length === 0) {
+      res.status(404).json({ message: "Blog post not found, check spelling." });
+      return;
+    }
+
+    const result = await db.query(
+      "UPDATE posts SET tags = $1 WHERE id = $2 RETURNING *",
+      [tags, id]
+    );
+    if (result.rows.length === 0) {
+      res.status(404).json({ message: "There are no blogs with those tags." });
+      return;
+    }
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getBlogsByTags = async (req, res) => {
+  const { tags } = req.body;
+  console.log(tags);
+  try {
+    const result = await db.query(
+      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id WHERE $1 = ANY(posts.tags) ORDER BY posts.updoots DESC",
+      [tags]
+    );
+    if (result.rows.length === 0) {
+      res.status(404).json({ message: "There are no blogs with those tags." });
+      return;
+    }
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   getAllBlogs,
   getMyBlogs,
@@ -188,4 +235,6 @@ module.exports = {
   deleteBlogPost,
   giveUpDootBlog,
   giveDownDootBlog,
+  addTagToBlog,
+  getBlogsByTags,
 };

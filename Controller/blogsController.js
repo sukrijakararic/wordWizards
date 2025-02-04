@@ -1,14 +1,27 @@
 const express = require("express");
 const blogRouter = express.Router();
-const { getAllBlogs, getMyBlogs, createBlog, updateBlogPost, deleteBlogPost, giveUpDootBlog, giveDownDootBlog, getBlogsByDoots } = require("../Model/blogModel");
+const {
+  getAllBlogs,
+  getMyBlogs,
+  createBlog,
+  updateBlogPost,
+  deleteBlogPost,
+  giveUpDootBlog,
+  giveDownDootBlog,
+  getBlogsByDoots,
+  addTagToBlog,
+  getBlogsByTags,
+} = require("../Model/blogModel");
 
 blogRouter.get("/allBlogs", getAllBlogs);
 blogRouter.get("/myBlogs", getMyBlogs);
 blogRouter.get("/blogsByDoots", getBlogsByDoots);
+blogRouter.get("/blogsByTags", getBlogsByTags);
 blogRouter.post("/createBlog", createBlog);
 blogRouter.put("/giveUpDootBlog", giveUpDootBlog);
 blogRouter.put("/giveDownDootBlog", giveDownDootBlog);
 blogRouter.put("/updateBlog", updateBlogPost);
+blogRouter.put("/addTagToBlog", addTagToBlog);
 blogRouter.delete("/deleteBlog", deleteBlogPost);
 
 module.exports = blogRouter;
