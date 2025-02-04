@@ -33,6 +33,17 @@ const getMyBlogs = async (req, res) => {
   }
 };
 
+const getBlogsByDoots = async (req, res) => {
+  try {
+    const result = await db.query(
+      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id ORDER BY updoots DESC"
+    );
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const createBlog = async (req, res) => {
   const { title, content } = req.body;
   if (!req.user) {
@@ -171,6 +182,7 @@ const giveDownDootBlog = async (req, res) => {
 module.exports = {
   getAllBlogs,
   getMyBlogs,
+  getBlogsByDoots,
   createBlog,
   updateBlogPost,
   deleteBlogPost,

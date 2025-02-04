@@ -1,7 +1,6 @@
 const { Client } = require("pg");
 const { DB } = require("./config");
 
-
 (async () => {
   // The tables will be here
 
@@ -31,8 +30,7 @@ const { DB } = require("./config");
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP,
       user_id INT,
-      updoots INT,
-      downDoots INT,
+      updoots INT DEFAULT 0,
       FOREIGN KEY (user_id) REFERENCES users(id)
     );
   `;
@@ -44,8 +42,7 @@ const { DB } = require("./config");
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       post_id INT,
       user_id INT,
-      updoots INT,
-      downDoots INT,
+     updoots INT DEFAULT 0,
       FOREIGN KEY (user_id) REFERENCES users(id),
       FOREIGN KEY (post_id) REFERENCES posts(id)
     );
@@ -58,8 +55,6 @@ const { DB } = require("./config");
       ('Vestibulum', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.', 1);
   `;
 
-  
-  
   try {
     const db = new Client({
       user: DB.PGUSER,
@@ -68,19 +63,19 @@ const { DB } = require("./config");
       password: DB.PGPASSWORD,
       port: DB.PGPORT,
     });
-    
+
     await db.connect();
-    
+
     // Create tables on database
     // Make sure to query any tables added
     await db.query(usersTableStmt);
     await db.query(postsTableStmt);
     await db.query(commentsTableStmt);
 
-    // Insert sample 
+    // Insert sample
     await db.query(userSampleData);
     await db.query(insertPostsStmt);
-    
+
     await db.end();
   } catch (err) {
     console.log("ERROR CREATING ONE OR MORE TABLES: ", err);
