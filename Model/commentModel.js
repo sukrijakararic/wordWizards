@@ -4,7 +4,7 @@ const getCommentsByBlog = async (req, res) => {
     const { blog_id } = req.body;
     console.log(blog_id);
     try {
-        const result = await DB.query("SELECT * FROM comments WHERE blog_id = $1", [blog_id]);
+        const result = await DB.query("SELECT comments.*, username, title FROM comments inner join users on comments.user_id = users.id inner join blogs on comments.blog_id = blogs.id WHERE blog_id = $1", [blog_id]);
         if (result.rows.length === 0) {
             res.status(404).json({ message: "No comments found" });
             return;

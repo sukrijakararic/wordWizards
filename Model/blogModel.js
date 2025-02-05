@@ -123,11 +123,19 @@ const deleteBlogPost = async (req, res) => {
       return;
     }
 
+    const blogId = titleCheck.rows[0].id;
+
     const result = await db.query(
+      "DELETE FROM comments WHERE blog_id = $1 AND user_id = $2",
+      [blogId, id]
+    );
+
+    const result2 = await db.query(
       "DELETE FROM blogs WHERE title = $1 AND user_id = $2 RETURNING *",
       [title, id]
     );
-    res.status(200).json(result.rows);
+  
+    res.status(200).json(result2.rows);
   } catch (err) {
     console.log(err);
   }
