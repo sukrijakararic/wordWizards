@@ -231,7 +231,7 @@ const getBlogsByTagsOrderedByCreated = async (req, res) => {
   console.log(tags);
   try {
     const result = await db.query(
-      "SELECT blogs.*, users.username FROM postblogs inner join users on blogs.user_id = users.id WHERE $1 = ANY(blogs.tags) ORDER BY blogs.created_at DESC",
+      "SELECT blogs.*, users.username FROM blogs inner join users on blogs.user_id = users.id WHERE $1 = ANY(blogs.tags) ORDER BY blogs.created_at DESC",
       [tags]
     );
     if (result.rows.length === 0) {
