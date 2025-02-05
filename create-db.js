@@ -41,6 +41,7 @@ const { DB } = require("./config");
       id SERIAL PRIMARY KEY,
       content TEXT NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP,
       post_id INT,
       user_id INT,
      updoots INT DEFAULT 0,
