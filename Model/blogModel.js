@@ -4,7 +4,7 @@ const { getUserByEmail } = require("../Model/userModel");
 const getAllBlogs = async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id"
+      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id order by posts.created_at desc"
     );
     res.status(200).json(result.rows);
   } catch (err) {
