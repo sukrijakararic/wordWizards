@@ -4,7 +4,7 @@ const { getUserByEmail } = require("../Model/userModel");
 const getAllBlogs = async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id order by posts.created_at desc"
+      "SELECT blogs.*, users.username FROM blogs inner join users on blogs.user_id = users.id order by blogs.created_at desc"
     );
     res.status(200).json(result.rows);
   } catch (err) {
@@ -20,7 +20,7 @@ const getMyBlogs = async (req, res) => {
   const { id } = req.user;
   try {
     const result = await db.query(
-      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id WHERE posts.user_id = $1",
+      "SELECT blogs.*, users.username FROM blogs inner join users on blogs.user_id = users.id WHERE blogs.user_id = $1",
       [id]
     );
     if (result.rows.length === 0) {
@@ -36,7 +36,7 @@ const getMyBlogs = async (req, res) => {
 const getBlogsByDoots = async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id ORDER BY updoots DESC"
+      "SELECT blogs.*, users.username FROM blogs inner join users on blogs.user_id = users.id ORDER BY updoots DESC"
     );
     res.status(200).json(result.rows);
   } catch (err) {
@@ -57,7 +57,7 @@ const createBlog = async (req, res) => {
   }
   try {
     const titleCheck = await db.query(
-      "SELECT * FROM posts WHERE title = $1 AND user_id = $2",
+      "SELECT * FROM blogs WHERE title = $1 AND user_id = $2",
       [title, id]
     );
     if (titleCheck.rows.length > 0) {
@@ -68,7 +68,7 @@ const createBlog = async (req, res) => {
     }
     const user = await getUserByEmail(email);
     const result = await db.query(
-      "INSERT INTO posts (title, content, user_id) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO blogs (title, content, user_id) VALUES ($1, $2, $3) RETURNING *",
       [title, content, user.id]
     );
     res.status(200).json(result.rows);
@@ -86,7 +86,7 @@ const updateBlogPost = async (req, res) => {
   const { title, content } = req.body;
   try {
     const titleCheck = await db.query(
-      "SELECT * FROM posts WHERE title = $1 AND user_id = $2",
+      "SELECT * FROM blogs WHERE title = $1 AND user_id = $2",
       [title, id]
     );
     if (titleCheck.rows.length === 0) {
@@ -97,7 +97,7 @@ const updateBlogPost = async (req, res) => {
     const blogId = titleCheck.rows[0].id;
 
     const result = await db.query(
-      "UPDATE posts SET title = $1, content = $2, updated_at = NOW() WHERE user_id = $3 AND id = $4 RETURNING *",
+      "UPDATE blogs SET title = $1, content = $2, updated_at = NOW() WHERE user_id = $3 AND id = $4 RETURNING *",
       [title, content, id, blogId]
     );
     res.status(200).json(result.rows);
@@ -115,7 +115,7 @@ const deleteBlogPost = async (req, res) => {
   const { title } = req.body;
   try {
     const titleCheck = await db.query(
-      "SELECT * FROM posts WHERE title = $1 AND user_id = $2",
+      "SELECT * FROM blogs WHERE title = $1 AND user_id = $2",
       [title, id]
     );
     if (titleCheck.rows.length === 0) {
@@ -124,7 +124,7 @@ const deleteBlogPost = async (req, res) => {
     }
 
     const result = await db.query(
-      "DELETE FROM posts WHERE title = $1 AND user_id = $2 RETURNING *",
+      "DELETE FROM blogs WHERE title = $1 AND user_id = $2 RETURNING *",
       [title, id]
     );
     res.status(200).json(result.rows);
@@ -140,14 +140,14 @@ const giveUpDootBlog = async (req, res) => {
   }
   const { id } = req.body;
   try {
-    const postCheck = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+    const postCheck = await db.query("SELECT * FROM blogs WHERE id = $1", [id]);
     if (postCheck.rows.length === 0) {
       res.status(404).json({ message: "Blog post not found, check spelling." });
       return;
     }
 
     const result = await db.query(
-      "UPDATE posts SET updoots = updoots + 1 WHERE id = $1 RETURNING *",
+      "UPDATE blogs SET updoots = updoots + 1 WHERE id = $1 RETURNING *",
       [id]
     );
     res.status(200).json(result.rows);
@@ -163,14 +163,14 @@ const giveDownDootBlog = async (req, res) => {
   }
   const { id } = req.body;
   try {
-    const postCheck = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+    const postCheck = await db.query("SELECT * FROM blogs WHERE id = $1", [id]);
     if (postCheck.rows.length === 0) {
       res.status(404).json({ message: "Blog post not found, check spelling." });
       return;
     }
 
     const result = await db.query(
-      "UPDATE posts SET updoots = updoots - 1 WHERE id = $1 RETURNING *",
+      "UPDATE blogs SET updoots = updoots - 1 WHERE id = $1 RETURNING *",
       [id]
     );
     res.status(200).json(result.rows);
@@ -188,14 +188,14 @@ const addTagToBlog = async (req, res) => {
   }
   const { id, tags } = req.body;
   try {
-    const postCheck = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+    const postCheck = await db.query("SELECT * FROM blogs WHERE id = $1", [id]);
     if (postCheck.rows.length === 0) {
       res.status(404).json({ message: "Blog post not found, check spelling." });
       return;
     }
 
     const result = await db.query(
-      "UPDATE posts SET tags = $1 WHERE id = $2 RETURNING *",
+      "UPDATE blogs SET tags = $1 WHERE id = $2 RETURNING *",
       [tags, id]
     );
     if (result.rows.length === 0) {
@@ -213,7 +213,7 @@ const getBlogsByTagsOrderedByDoots = async (req, res) => {
   console.log(tags);
   try {
     const result = await db.query(
-      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id WHERE $1 = ANY(posts.tags) ORDER BY posts.updoots DESC",
+      "SELECT blogs.*, users.username FROM blogs inner join users on blogs.user_id = users.id WHERE $1 = ANY(blogs.tags) ORDER BY blogs.updoots DESC",
       [tags]
     );
     if (result.rows.length === 0) {
@@ -231,7 +231,7 @@ const getBlogsByTagsOrderedByCreated = async (req, res) => {
   console.log(tags);
   try {
     const result = await db.query(
-      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id WHERE $1 = ANY(posts.tags) ORDER BY posts.created_at DESC",
+      "SELECT blogs.*, users.username FROM postblogs inner join users on blogs.user_id = users.id WHERE $1 = ANY(blogs.tags) ORDER BY blogs.created_at DESC",
       [tags]
     );
     if (result.rows.length === 0) {

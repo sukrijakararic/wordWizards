@@ -22,8 +22,8 @@ const { DB } = require("./config");
       ('goodBoy', '1', 'dog@email.com');
       `;
 
-  const postsTableStmt = `
-    CREATE TABLE IF NOT EXISTS posts (
+  const blogsTableStmt = `
+    CREATE TABLE IF NOT EXISTS blogs (
       id SERIAL PRIMARY KEY,
       title VARCHAR(255) NOT NULL,
       content TEXT NOT NULL,
@@ -42,16 +42,16 @@ const { DB } = require("./config");
       content TEXT NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP,
-      post_id INT,
+      blog_id INT,
       user_id INT,
      updoots INT DEFAULT 0,
       FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (post_id) REFERENCES posts(id)
+      FOREIGN KEY (blog_id) REFERENCES blogs(id)
     );
   `;
 
-  const insertPostsStmt = `
-    INSERT INTO posts (title, content, user_id)
+  const insertBlogsStmt = `
+    INSERT INTO blogs (title, content, user_id)
     VALUES 
       ('Lorem Ipsum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1),
       ('Vestibulum', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.', 1);
@@ -71,12 +71,12 @@ const { DB } = require("./config");
     // Create tables on database
     // Make sure to query any tables added
     await db.query(usersTableStmt);
-    await db.query(postsTableStmt);
+    await db.query(blogsTableStmt);
     await db.query(commentsTableStmt);
 
     // Insert sample
     await db.query(userSampleData);
-    await db.query(insertPostsStmt);
+    await db.query(insertBlogsStmt);
 
     await db.end();
   } catch (err) {
