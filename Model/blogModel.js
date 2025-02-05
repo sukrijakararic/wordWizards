@@ -208,12 +208,30 @@ const addTagToBlog = async (req, res) => {
   }
 };
 
-const getBlogsByTags = async (req, res) => {
+const getBlogsByTagsOrderedByDoots = async (req, res) => {
   const { tags } = req.body;
   console.log(tags);
   try {
     const result = await db.query(
       "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id WHERE $1 = ANY(posts.tags) ORDER BY posts.updoots DESC",
+      [tags]
+    );
+    if (result.rows.length === 0) {
+      res.status(404).json({ message: "There are no blogs with those tags." });
+      return;
+    }
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getBlogsByTagsOrderedByCreated = async (req, res) => {
+  const { tags } = req.body;
+  console.log(tags);
+  try {
+    const result = await db.query(
+      "SELECT posts.*, users.username FROM posts inner join users on posts.user_id = users.id WHERE $1 = ANY(posts.tags) ORDER BY posts.created_at DESC",
       [tags]
     );
     if (result.rows.length === 0) {
@@ -236,5 +254,6 @@ module.exports = {
   giveUpDootBlog,
   giveDownDootBlog,
   addTagToBlog,
-  getBlogsByTags,
+  getBlogsByTagsOrderedByDoots,
+  getBlogsByTagsOrderedByCreated,
 };
