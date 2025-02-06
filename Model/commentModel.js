@@ -16,13 +16,17 @@ const getCommentsByBlog = async (req, res) => {
 };
 
 const createComment = async (req, res) => {
+    if (!req.user) {
+        res.status(401).json({ message: "Please log in to create a comment" });
+        return;
+    }
     const { id } = req.user;
     const { content, blog_id } = req.body;
     try {
         const result = await DB.query("INSERT INTO comments (content, user_id, blog_id) VALUES ($1, $2, $3) RETURNING *", [content, id, blog_id]);
         res.status(200).json(result.rows);
     } catch (err) {
-        console.log(err);
+        console.log(err, "Error creating comment");
     }
 };
 
