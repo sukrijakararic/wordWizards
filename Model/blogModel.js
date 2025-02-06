@@ -188,7 +188,7 @@ const giveDownDootBlog = async (req, res) => {
 };
 
 
-// In the request body for tags, be sure to use curly braces to surround the tags in the JSON. For ex, {tags: "{tag1", "tag2}"}
+// In the request body for tags, be sure to use curly braces to surround the tags in the JSON. For ex, {tags: "{tag1, tag2}"}
 const addTagToBlog = async (req, res) => {
   if (!req.user) { 
     res.status(401).json({ message: "Please log in to add a tag" });
