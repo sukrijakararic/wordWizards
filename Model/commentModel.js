@@ -73,6 +73,25 @@ const commentUpDoot = async (req, res) => {
     }
 };
 
+const commentDownDoot = async (req, res) => {
+    if (!req.user) {
+        res.status(401).json({ message: "Please log in to doot a comment" });
+        return;
+    }
+    const { id } = req.user;
+    const { comment_id } = req.body;
+    if (!comment_id) {
+        res.status(400).json({ message: "Please provide a comment_id" });
+        return;
+    }
+    try {
+        const result = await DB.query("UPDATE comments SET updoots = updoots - 1 WHERE id = $1 RETURNING *", [comment_id]);
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 const createComment = async (req, res) => {
     if (!req.user) {
         res.status(401).json({ message: "Please log in to create a comment" });
@@ -92,10 +111,51 @@ const createComment = async (req, res) => {
     }
 };
 
+const editComment = async (req, res) => {
+    if (!req.user) {
+        res.status(401).json({ message: "Please log in to edit a comment" });
+        return;
+    }
+    const { id } = req.user;
+    const { content, comment_id } = req.body;
+    if (!content || !comment_id) {
+        res.status(400).json({ message: "All fields are required" });
+        return;
+    }
+    try {
+        const result = await DB.query("UPDATE comments SET updated_at = NOW(), content = $1 WHERE id = $2 AND user_id = $3 RETURNING *", [content, comment_id, id]);
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.log(err, "Error editing comment");
+    }
+};
+
+const deleteComment = async (req, res) => {
+    if (!req.user) {
+        res.status(401).json({ message: "Please log in to delete a comment" });
+        return;
+    }
+    const { id } = req.user;
+    const { comment_id } = req.body;
+    if (!comment_id) {
+        res.status(400).json({ message: "Please provide a comment_id" });
+        return;
+    }
+    try {
+        const result = await DB.query("DELETE FROM comments WHERE id = $1 AND user_id = $2 RETURNING *", [comment_id, id]);
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.log(err, "Error deleting comment");
+    }
+};
+
 module.exports = {
     getCommentsByBlog,
     createComment,
+    editComment,
     getMyComments,
     sortCommentsByCreated,
-    commentUpDoot
+    commentUpDoot,
+    commentDownDoot,
+    deleteComment
 }
