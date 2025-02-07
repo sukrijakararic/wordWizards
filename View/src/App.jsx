@@ -1,11 +1,27 @@
 
 import './App.css'
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { Root } from './components/Root/Root';
+
+
+const appRouter = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />} />
+  )
+);
 
 function App() {
 
   return (
     <>
-      <h1>wordWizards</h1>
+      <RouterProvider router={appRouter} />
        
     </>
   )
