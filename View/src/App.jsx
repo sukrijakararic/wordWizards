@@ -9,13 +9,15 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Root } from './components/Root/Root';
-import { Basic } from './components/basic/Basic';
+import { LandingPage } from './components/LandingPage/LandingPage';
+
 
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route index element={<Basic />} />
+      <Route path="/" element={<LandingPage />} />
+
     </Route>
   )
 );
