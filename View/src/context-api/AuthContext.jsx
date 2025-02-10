@@ -3,27 +3,17 @@ import { createContext, useState, useEffect } from 'react';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
+  const [loggedIn, setLoggedIn] = useState(() => {
     const storedLoggedIn = localStorage.getItem('loggedIn');
-    if (storedLoggedIn) {
-      setLoggedIn(storedLoggedIn === 'true');
-    }
-    window.addEventListener('beforeunload', () => {
-      localStorage.removeItem('loggedIn');
-    });
-    return () => {
-      window.removeEventListener('beforeunload', () => {});
-    };
-  }, []);
+    return storedLoggedIn === 'true';
+  });
 
   useEffect(() => {
-    if (loggedIn) {
-      localStorage.setItem('loggedIn', 'true');
-    } else {
-      localStorage.removeItem('loggedIn');
-    }
+    localStorage.setItem('loggedIn', loggedIn.toString());
+
+    window.addEventListener('beforeunload', () => {
+      setLoggedIn(false);
+    });
   }, [loggedIn]);
 
   return (

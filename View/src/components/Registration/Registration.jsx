@@ -22,7 +22,7 @@ export const Registration = () => {
     event.target.reset();
     document.getElementById("responseStatus").textContent = response.message;
     if (response.message === "User created") {
-      Navigate("/login");
+      Navigate("/profile");
     }
   };
 
@@ -36,7 +36,6 @@ export const Registration = () => {
       >
         <Form.Control type="text" placeholder="" name="username" />
       </FloatingLabel>
-      
       <FloatingLabel
         controlId="floatingInput1"
         label="Email address"
@@ -55,10 +54,8 @@ export const Registration = () => {
         Submit
       </Button>{" "}
       <p className={styles.responseStatus} id="responseStatus"></p>
-      
       <p className={styles.oauthRegister}>Or register with</p>
       <GoogleOauth />
-
       <p className={styles.oauthRegister}>
         Already have an account?{" "}
         <Link to="/login" className={styles.loginLink}>
