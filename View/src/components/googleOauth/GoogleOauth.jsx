@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import styles from "./GoogleOauth.module.css";
+import { AuthContext } from "../../context-api/AuthContext";
 
 export const GoogleOauth = () => {
+  const { setLoggedIn } = useContext(AuthContext);
 
   const handleGoogleOauth = async () => {
-    window.location = `/api/google`;
+    window.location = 'api/google';
+    setLoggedIn(true);
   };
 
   return (
