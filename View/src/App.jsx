@@ -10,6 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Root } from './components/Root/Root';
 import { LandingPage } from './components/LandingPage/LandingPage';
+import { ContextProviders } from './context-api/ContextProviders';
 
 
 
@@ -26,7 +27,9 @@ function App() {
 
   return (
     <>
+    <ContextProviders>
       <RouterProvider router={appRouter} />
+    </ContextProviders>
        
     </>
   )
