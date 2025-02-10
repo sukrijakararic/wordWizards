@@ -13,12 +13,14 @@ import { ContextProviders} from "./context-api/ContextProviders";
 import { RequireAuth } from "./utils/RequireAuth";
 import { Login } from "./components/login/Login";
 import { Profile } from "./components/profile/Profile";
+import { AboutUs } from "./components/AboutUs/AboutUs";
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/about" element={<AboutUs />} />
       <Route
         path="profile"
         element={

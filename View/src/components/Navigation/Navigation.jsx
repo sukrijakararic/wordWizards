@@ -32,8 +32,8 @@ export const Navigation = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link>
-                <Link to="/" className={styles.navLink}>
-                  tbd
+                <Link to="/about" className={styles.navLink}>
+                  About Us
                 </Link>
               </Nav.Link>
               {loggedIn === true ? (
