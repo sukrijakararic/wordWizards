@@ -1,13 +1,17 @@
-import React from 'react'
-import styles from './LandingPage.module.css'
+import React, { useState } from "react";
+import styles from "./LandingPage.module.css";
+import { Registration } from "../Registration/Registration";
 
 export const LandingPage = () => {
   return (
-    <div>
-        <div className={styles.container}>
-            <div className={styles.title}>Welcome to the Landing Page</div>
-            <div className={styles.subtitle}>This is a simple landing page</div>
-        </div>
+    <div className={styles.landingPage}>
+      <div className={styles.title}>
+        <h1>
+          Welcome to <span className={styles.wordWizards}>wordWizards</span>
+        </h1>
+        <h3>Unleash the power of words!</h3>{" "}
+      </div>
+      <Registration />
     </div>
-  )
-}
+  );
+};

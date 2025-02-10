@@ -9,6 +9,7 @@ const passport = require("./strategies/main");
 const userRouter = require("./Controller/userController");
 const blogsRouter = require("./Controller/blogsController");
 const commentRouter = require("./Controller/commentController");
+const googleRouter = require("./Controller/googleRouter");
 
 app.use(express.json());
 app.use(cors());
@@ -38,7 +39,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!, test, test");
 });
 
-app.use("/api", userRouter, blogsRouter, commentRouter);
+app.use("/api", userRouter, blogsRouter, commentRouter, googleRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

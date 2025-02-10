@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 export const Footer = () => {
   return (
-    <Navbar className="bg-body-tertiary" fixed="bottom">
+    <Navbar className="bg-body-tertiary" fixed="sticky-bottom">
       <Container>
         <Navbar.Brand href="#home">wordWizards</Navbar.Brand>
         <Navbar.Toggle />

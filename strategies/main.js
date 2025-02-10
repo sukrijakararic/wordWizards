@@ -1,6 +1,7 @@
 
 const passport = require("passport");
 const localStrategy = require("./localStrategy");
+const googleStrategy = require("./googleStrategy");
 
 
 
@@ -17,6 +18,7 @@ passport.deserializeUser(function (user, done) {
 });
 
 localStrategy(passport);
+googleStrategy(passport);
 
 
 

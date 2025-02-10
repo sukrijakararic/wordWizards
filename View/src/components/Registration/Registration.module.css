@@ -1,0 +1,44 @@
+.registrationForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+.registrationForm h2 {
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.registrationSubmit {
+  margin-top: 1rem;
+}
+
+.oauthRegister {
+  color: black;
+  margin: 0;
+}
+
+.loginLink {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.loginLink:hover {
+  text-decoration: underline;
+}
+
+.responseStatus {
+  color: green;
+  font-weight: bold;
+  border-radius: .5rem;
+  padding: 0.5rem;
+  margin-top: .5rem;
+}
+
+@media only screen and (max-width: 577px) {
+
+}
