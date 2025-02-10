@@ -3,7 +3,7 @@ import styles from "./Registration.module.css";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { addUser } from "../../services";
+import { addUser } from "../../utils/services";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleOauth } from "../googleOauth/GoogleOauth";
 

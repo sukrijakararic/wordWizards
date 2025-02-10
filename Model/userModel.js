@@ -47,7 +47,20 @@ const registerUser = async (request, response, next) => {
   }
 };
 
+const showUser = async (request, response, next) => {
+  console.log("showUser: ", request.user);
+  if (!request.user) {
+    response.status(401).json({ message: "Please log in" });
+  } else {
+    const result = await db.query("SELECT email, username FROM users where email = $1", [
+      request.user.email,
+    ]);
+    response.json(result.rows[0]);
+  }
+};
+
 module.exports = {
   getUserByEmail,
   registerUser,
+  showUser,
 };

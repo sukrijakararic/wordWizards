@@ -1,11 +1,13 @@
 const express = require("express");
 const userRouter = express.Router();
-const { registerUser } = require("../Model/userModel");
+const { registerUser, showUser } = require("../Model/userModel");
 const passport = require("../strategies/main");
 
 userRouter.get("/user/failedLogin", (req, res) => {
     res.status(401).json({ message: "Email or password is incorrect" });
 });
+
+userRouter.get("/loggedIn", showUser);
 
 userRouter.post("/register", registerUser);
 
