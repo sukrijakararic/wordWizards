@@ -19,7 +19,8 @@ googleRouter.get(
   (req, res) => {
     console.log("req.user: ", req.user);
     req.session.user = req.user;
-    res.status(200).redirect("/");
+    // make sure to change the redirect to root when pushing to production
+    res.status(200).redirect("localhost:5173");
   }
 );
 

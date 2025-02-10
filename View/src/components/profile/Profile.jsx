@@ -23,18 +23,14 @@ export const Profile = () => {
       {loggedUser ? (
         <Card style={{ width: "18rem" }} className={styles.profile}>
           <Card.Header>
-            <p className={styles.profileExtras}>Pilot</p>
+            <p className={styles.profileExtras}>Wizard Card</p>
           </Card.Header>
           <ListGroup variant="flush" className={styles.listGroup}>
             <ListGroup.Item>Email: {loggedUser.email}</ListGroup.Item>
             <ListGroup.Item>Username: {loggedUser.username}</ListGroup.Item>
             <ListGroup.Item>
-              <p className={styles.profileExtras}>Ready to fly!</p>
             </ListGroup.Item>
           </ListGroup>
-          <Link to="/orders" className={styles.profileExtras}>
-            My orders
-          </Link>
         </Card>
       ) : (
         <p>Loading...</p>
