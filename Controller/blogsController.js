@@ -9,9 +9,9 @@ const {
   giveUpDootBlog,
   giveDownDootBlog,
   getBlogsByDoots,
-  addTagToBlog,
+  // addTagToBlog,
   getBlogsByTagsOrderedByDoots,
-  getBlogsByTagsOrderedByCreated
+  getBlogsByTagsOrderedByCreated,
 } = require("../Model/blogModel");
 
 blogRouter.get("/allBlogs", getAllBlogs); //done
@@ -23,7 +23,7 @@ blogRouter.post("/createBlog", createBlog); //done
 blogRouter.put("/giveUpDootBlog", giveUpDootBlog);
 blogRouter.put("/giveDownDootBlog", giveDownDootBlog);
 blogRouter.put("/updateBlog", updateBlogPost);
-blogRouter.put("/addTagToBlog", addTagToBlog); //wip
+//blogRouter.put("/addTagToBlog", addTagToBlog);
 blogRouter.delete("/deleteBlog", deleteBlogPost);
 
 module.exports = blogRouter;

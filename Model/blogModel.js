@@ -188,33 +188,33 @@ const giveDownDootBlog = async (req, res) => {
 };
 
 
-// In the request body for tags, be sure to use curly braces to surround the tags in the JSON. For ex, {tags: "{tag1, tag2}"}
-const addTagToBlog = async (req, res) => {
-  if (!req.user) { 
-    res.status(401).json({ message: "Please log in to add a tag" });
-    return;
-  }
-  const { id, tags } = req.body;
-  try {
-    const postCheck = await db.query("SELECT * FROM blogs WHERE id = $1", [id]);
-    if (postCheck.rows.length === 0) {
-      res.status(404).json({ message: "Blog post not found, check spelling." });
-      return;
-    }
+// // In the request body for tags, be sure to use curly braces to surround the tags in the JSON. For ex, {tags: "{tag1, tag2}"}
+// const addTagToBlog = async (req, res) => {
+//   if (!req.user) { 
+//     res.status(401).json({ message: "Please log in to add a tag" });
+//     return;
+//   }
+//   const { id, tags } = req.body;
+//   try {
+//     const postCheck = await db.query("SELECT * FROM blogs WHERE id = $1", [id]);
+//     if (postCheck.rows.length === 0) {
+//       res.status(404).json({ message: "Blog post not found, check spelling." });
+//       return;
+//     }
 
-    const result = await db.query(
-      "UPDATE blogs SET tags = $1 WHERE id = $2 RETURNING *",
-      [tags, id]
-    );
-    if (result.rows.length === 0) {
-      res.status(404).json({ message: "There are no blogs with those tags." });
-      return;
-    }
-    res.status(200).json({ message: "Tag added to blog post" });
-  } catch (err) {
-    console.log(err);
-  }
-};
+//     const result = await db.query(
+//       "UPDATE blogs SET tags = $1 WHERE id = $2 RETURNING *",
+//       [tags, id]
+//     );
+//     if (result.rows.length === 0) {
+//       res.status(404).json({ message: "There are no blogs with those tags." });
+//       return;
+//     }
+//     res.status(200).json({ message: "Tag added to blog post" });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 const getBlogsByTagsOrderedByDoots = async (req, res) => {
   const { tags } = req.body;
@@ -261,7 +261,7 @@ module.exports = {
   deleteBlogPost,
   giveUpDootBlog,
   giveDownDootBlog,
-  addTagToBlog,
+  //addTagToBlog,
   getBlogsByTagsOrderedByDoots,
   getBlogsByTagsOrderedByCreated,
 };
