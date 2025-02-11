@@ -70,3 +70,20 @@ export const addUser = async (user) => {
     }
   };
   
+
+  export const createBlog = async (blog) => {
+    try {
+      const response = await fetch("/api/createBlog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(blog),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error creating blog:", error);
+      throw error;
+    }
+  };
