@@ -1,0 +1,16 @@
+.createBlogContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    height: 100vh;
+}
+
+.createBlogForm {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}

@@ -71,7 +71,7 @@ const createBlog = async (req, res) => {
       "INSERT INTO blogs (title, content, user_id) VALUES ($1, $2, $3) RETURNING *",
       [title, content, user.id]
     );
-    res.status(200).json(result.rows);
+    res.status(200).json("Blog post created");
   } catch (err) {
     console.log(err);
   }
