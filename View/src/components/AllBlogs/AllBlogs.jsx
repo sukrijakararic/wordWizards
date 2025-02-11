@@ -26,13 +26,12 @@ export const AllBlogs = () => {
     <div className={styles.allBlogsContainer}>
       {allBlogs.length > 0 ? (
         allBlogs.map((blog) => (
-          <Card key={blog.id} style={{ width: "18rem", height: "" }}>
+          <Card key={blog.id} style={{ width: "18rem", height: "15rem" }}>
             <Card.Body>
               <Card.Title>{blog.title}</Card.Title>
-              <Card.Text>{blog.content}</Card.Text>
               <Card.Text>UpDoots: {blog.updoots}</Card.Text>
               <Card.Text>Tags: {blog.tags}</Card.Text>
-              <Button variant="primary">Go somewhere</Button>
+              <Button variant="primary">Read More</Button>
             </Card.Body>
           </Card>
         ))
