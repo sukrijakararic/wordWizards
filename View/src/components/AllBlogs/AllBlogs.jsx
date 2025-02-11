@@ -40,6 +40,7 @@ export const AllBlogs = () => {
           <Card className={styles.blogCard} key={blog.id}>
             <Card.Body>
               <Card.Title style={{ textDecoration: "underline" }}>{blog.title}</Card.Title>
+              <Card.Text >By <span style={{ color: "green", fontWeight: "bold" }}>{blog.username}</span></Card.Text>
               <Card.Text style={{ textDecoration: "underline" }}>UpDoots: <span style={{ color: "green", fontWeight: "bold" }}>{blog.updoots}</span></Card.Text>
               <Card.Text>Tags: <span style={{ color: "blue", fontWeight: "bold" }}>{blog.tags ? blog.tags.join(', ') : 'No tags'}</span></Card.Text>
               <Button variant="success" onClick={() => handleBlogSet(blog)}>Read More</Button>
