@@ -9,7 +9,7 @@ export const SelectedBlog = () => {
   return (
     <div className={styles.selectedBlogPage}>
       <div className={styles.selectedBlogContainer}> 
-      <h1 style={{ color: "#333" }}>{blog.title}</h1>
+      <h1 style={{ color: "#333", textAlign: "center" }}>{blog.title}</h1>
       <h6>By: {blog.username}</h6>
       <h7>tags - <span style={{ color: "orange", fontWeight: "bold" }}>{blog.tags ? blog.tags.join(', ') : 'No tags'}</span></h7>
       <h6>Written on <span style={{ color: "green", fontWeight: "bold" }}> {new Date(blog.created_at).toLocaleDateString()}</span></h6>
