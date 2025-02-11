@@ -30,7 +30,7 @@ export const AllBlogs = () => {
             <Card.Body>
               <Card.Title>{blog.title}</Card.Title>
               <Card.Text>UpDoots: {blog.updoots}</Card.Text>
-              <Card.Text>Tags: {blog.tags}</Card.Text>
+              <Card.Text>Tags: {blog.tags ? blog.tags.join(', ') : 'No tags'}</Card.Text>
               <Button variant="primary">Read More</Button>
             </Card.Body>
           </Card>

@@ -87,3 +87,20 @@ export const addUser = async (user) => {
       throw error;
     }
   };
+
+  export const addTagToBlog = async (blog) => {
+    try {
+      const response = await fetch("/api/addTagToBlog", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(blog),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error adding tag to blog:", error);
+      throw error;
+    }
+  };

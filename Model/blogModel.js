@@ -45,13 +45,13 @@ const getBlogsByDoots = async (req, res) => {
 };
 
 const createBlog = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content, tag } = req.body;
   if (!req.user) {
     res.status(401).json({ message: "Please log in to create a blog post" });
     return;
   }
   const { email, id } = req.user;
-  if (!title || !content) {
+  if (!title || !content || !tag) {
     res.status(400).json({ message: "All fields are required" });
     return;
   }
@@ -68,8 +68,8 @@ const createBlog = async (req, res) => {
     }
     const user = await getUserByEmail(email);
     const result = await db.query(
-      "INSERT INTO blogs (title, content, user_id) VALUES ($1, $2, $3) RETURNING *",
-      [title, content, user.id]
+      "INSERT INTO blogs (title, content, user_id, tags) VALUES ($1, $2, $3, $4) RETURNING *",
+      [title, content, user.id, tag]
     );
     res.status(200).json("Blog post created");
   } catch (err) {
@@ -210,7 +210,7 @@ const addTagToBlog = async (req, res) => {
       res.status(404).json({ message: "There are no blogs with those tags." });
       return;
     }
-    res.status(200).json(result.rows);
+    res.status(200).json({ message: "Tag added to blog post" });
   } catch (err) {
     console.log(err);
   }

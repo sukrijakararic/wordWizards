@@ -2,11 +2,14 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import styles from "./CreateBlog.module.css";
 import Button from "react-bootstrap/Button";
-import { createBlog } from "../../utils/services";
+import { createBlog} from "../../utils/services";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const CreateBlog = () => {
   const Navigate = useNavigate();
+  const [selectedTags, setSelectedTags] = useState([]);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,6 +17,7 @@ export const CreateBlog = () => {
     const blog = {
       title: data.get("title"),
       content: data.get("content"),
+      tag: `{${selectedTags.join(",")}}`,
     };
     console.log(blog);
     const response = await createBlog(blog);
@@ -23,39 +27,66 @@ export const CreateBlog = () => {
       Navigate("/blogs");
     }
   };
-  return (
-    <div className={styles.createBlogContainer}>
-      <h3>Create a new blog</h3>
-      <h5>
-        What's been on your mind lately? Write a blog post about it and share it
-        with the world!
-      </h5>
 
-      <Form className={styles.createBlogForm} onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="The best blog post ever"
-            name="title"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Content</Form.Label>
-          <Form.Control as="textarea" name="content" rows={3} />
-        </Form.Group>
-        <Form.Select aria-label="Default select example">
-          <option>Tag</option>
-          <option value="casual">Casual</option>
-          <option value="compSci">compSci</option>
-          <option value="funny">funny</option>
-        </Form.Select>
+  const handleTagChange = (event) => {
+    const newSelectedTags = [...selectedTags];
+    if (event.target.checked) {
+      newSelectedTags.push(event.target.value);
+    } else {
+      const index = newSelectedTags.indexOf(event.target.value);
+      if (index > -1) {
+        newSelectedTags.splice(index, 1);
+      }
+    }
+    setSelectedTags(newSelectedTags);
+  };
 
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-        <p id="responseStatus"></p>
-      </Form>
-    </div>
-  );
-};
+    return (
+      <div className={styles.createBlogContainer}>
+        <h3>Create a new blog</h3>
+        <h5>
+          What's been on your mind lately? Write a blog post about it and share
+          it with the world!
+        </h5>
+
+        <Form className={styles.createBlogForm} onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>Title</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="The best blog post ever"
+              name="title"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Content</Form.Label>
+            <Form.Control as="textarea" name="content" rows={3} />
+          </Form.Group>
+          <Form.Group controlId="exampleForm.SelectMultiple">
+            <Form.Label style={{ display: "flex", flexDirection: "row" }}>
+              Tags | Select as many that apply
+            </Form.Label>
+            <div style={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
+              {["casual", "compSci", "funny", "food"].map((tag) => (
+                <Form.Check
+                  key={tag}
+                  type="checkbox"
+                  label={tag}
+                  value={tag}
+                  checked={selectedTags.includes(tag)}
+                  onChange={handleTagChange}
+                  style={{ marginRight: "1rem" }}
+                />
+              ))}
+            </div>
+          </Form.Group>
+
+          <Button variant="success" type="submit">
+            Submit
+          </Button>
+          <p id="responseStatus"></p>
+        </Form>
+      </div>
+    );
+  };
+
