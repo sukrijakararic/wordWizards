@@ -1,0 +1,10 @@
+.selectedBlogPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom, #fff, #f5deb3);
+}
+
+.selectedBlogContainer {
+    margin: 1rem;
+}
