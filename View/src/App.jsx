@@ -9,13 +9,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Root } from "./components/Root/Root";
 import { LandingPage } from "./components/LandingPage/LandingPage";
-import { ContextProviders} from "./context-api/ContextProviders";
+import { ContextProviders } from "./context-api/ContextProviders";
 import { RequireAuth } from "./utils/RequireAuth";
 import { Login } from "./components/login/Login";
 import { Profile } from "./components/profile/Profile";
 import { AboutUs } from "./components/AboutUs/AboutUs";
-import {AllBlogs} from "./components/AllBlogs/AllBlogs";
+import { AllBlogs } from "./components/AllBlogs/AllBlogs";
 import { CreateBlog } from "./components/CreateBlog/CreateBlog";
+import { SelectedBlog } from "./components/SelectedBlog/SelectedBlog";
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const appRouter = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/about" element={<AboutUs />} />
       <Route path="/blogs" element={<AllBlogs />} />
+      <Route path="/selectedBlog" element={<SelectedBlog />} />
       <Route
         path="/profile"
         element={

@@ -4,9 +4,18 @@ import { getAllBlogs } from "../../utils/services";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { BlogsContext } from "../../context-api/BlogsContext";
+import { SelectedBlogContext } from "../../context-api/SelectedBlogContext";
+import { useNavigate } from "react-router-dom";
 
 export const AllBlogs = () => {
   const { allBlogs, setAllBlogs } = useContext(BlogsContext);
+  const {setBlog } = useContext(SelectedBlogContext);
+  const Navigate = useNavigate();
+
+  const handleBlogSet = (blog) => {
+    setBlog(blog);
+    Navigate("/selectedBlog");
+  };
 
   const fetchAllBlogs = async () => {
     try {
@@ -33,7 +42,7 @@ export const AllBlogs = () => {
               <Card.Title style={{ textDecoration: "underline" }}>{blog.title}</Card.Title>
               <Card.Text style={{ textDecoration: "underline" }}>UpDoots: <span style={{ color: "green", fontWeight: "bold" }}>{blog.updoots}</span></Card.Text>
               <Card.Text>Tags: <span style={{ color: "blue", fontWeight: "bold" }}>{blog.tags ? blog.tags.join(', ') : 'No tags'}</span></Card.Text>
-              <Button variant="success">Read More</Button>
+              <Button variant="success" onClick={() => handleBlogSet(blog)}>Read More</Button>
             </Card.Body>
           </Card>
         ))
