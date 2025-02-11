@@ -36,6 +36,11 @@ export const Navigation = () => {
                   About Us
                 </Link>
               </Nav.Link>
+              <Nav.Link>
+                <Link to="/blogs" className={styles.navLink}>
+                  Blogs
+                </Link>
+              </Nav.Link>
               {loggedIn === true ? (
                 <>
                   <Nav.Link>

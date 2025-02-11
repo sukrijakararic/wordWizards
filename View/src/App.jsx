@@ -14,6 +14,7 @@ import { RequireAuth } from "./utils/RequireAuth";
 import { Login } from "./components/login/Login";
 import { Profile } from "./components/profile/Profile";
 import { AboutUs } from "./components/AboutUs/AboutUs";
+import {AllBlogs} from "./components/AllBlogs/AllBlogs";
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const appRouter = createBrowserRouter(
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/about" element={<AboutUs />} />
+      <Route path="/blogs" element={<AllBlogs />} />
       <Route
         path="profile"
         element={
