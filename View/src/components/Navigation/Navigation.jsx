@@ -50,6 +50,12 @@ export const Navigation = () => {
                   </Nav.Link>
 
                   <Nav.Link>
+                    <Link to="/createBlog" className={styles.navLink}>
+                      Create Blog
+                    </Link>
+                  </Nav.Link>
+
+                  <Nav.Link>
                     <Link to="/" onClick={handleLogout} className={styles.navLink}>
                       Logout
                     </Link>

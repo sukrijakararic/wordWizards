@@ -15,6 +15,7 @@ import { Login } from "./components/login/Login";
 import { Profile } from "./components/profile/Profile";
 import { AboutUs } from "./components/AboutUs/AboutUs";
 import {AllBlogs} from "./components/AllBlogs/AllBlogs";
+import { CreateBlog } from "./components/CreateBlog/CreateBlog";
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -24,10 +25,18 @@ const appRouter = createBrowserRouter(
       <Route path="/about" element={<AboutUs />} />
       <Route path="/blogs" element={<AllBlogs />} />
       <Route
-        path="profile"
+        path="/profile"
         element={
           <RequireAuth>
             <Profile />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/createBlog"
+        element={
+          <RequireAuth>
+            <CreateBlog />
           </RequireAuth>
         }
       />
