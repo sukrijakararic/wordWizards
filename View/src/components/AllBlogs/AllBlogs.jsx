@@ -30,9 +30,9 @@ export const AllBlogs = () => {
         allBlogs.map((blog) => (
           <Card className={styles.blogCard} key={blog.id}>
             <Card.Body>
-              <Card.Title>{blog.title}</Card.Title>
-              <Card.Text>UpDoots: {blog.updoots}</Card.Text>
-              <Card.Text>Tags: {blog.tags ? blog.tags.join(', ') : 'No tags'}</Card.Text>
+              <Card.Title style={{ textDecoration: "underline" }}>{blog.title}</Card.Title>
+              <Card.Text style={{ textDecoration: "underline" }}>UpDoots: <span style={{ color: "green", fontWeight: "bold" }}>{blog.updoots}</span></Card.Text>
+              <Card.Text>Tags: <span style={{ color: "blue", fontWeight: "bold" }}>{blog.tags ? blog.tags.join(', ') : 'No tags'}</span></Card.Text>
               <Button variant="success">Read More</Button>
             </Card.Body>
           </Card>
