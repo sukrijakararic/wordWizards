@@ -44,7 +44,7 @@ export const CreateBlog = () => {
     return (
       <div className={styles.createBlogContainer}>
         <h3>Create a new blog</h3>
-        <h5>
+        <h5 style={{ textAlign: "center" }}>
           What's been on your mind lately? Write a blog post about it and share
           it with the world!
         </h5>
@@ -60,13 +60,13 @@ export const CreateBlog = () => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>Content</Form.Label>
-            <Form.Control as="textarea" name="content" rows={3} />
+            <Form.Control as="textarea" name="content" rows={10} />
           </Form.Group>
           <Form.Group controlId="exampleForm.SelectMultiple">
-            <Form.Label style={{ display: "flex", flexDirection: "row" }}>
+            <Form.Label>
               Tags | Select as many that apply
             </Form.Label>
-            <div style={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
+            <div className={styles.tags}>
               {["casual", "compSci", "funny", "food"].map((tag) => (
                 <Form.Check
                   key={tag}
