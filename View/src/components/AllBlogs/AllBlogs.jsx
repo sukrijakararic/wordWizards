@@ -23,21 +23,24 @@ export const AllBlogs = () => {
   }, []);
 
   return (
+    <div className={styles.allBlogsPage}>
+      <h5>Sort By</h5>
     <div className={styles.allBlogsContainer}>
       {allBlogs.length > 0 ? (
         allBlogs.map((blog) => (
-          <Card key={blog.id} style={{ width: "18rem", height: "15rem" }}>
+          <Card className={styles.blogCard} key={blog.id}>
             <Card.Body>
               <Card.Title>{blog.title}</Card.Title>
               <Card.Text>UpDoots: {blog.updoots}</Card.Text>
               <Card.Text>Tags: {blog.tags ? blog.tags.join(', ') : 'No tags'}</Card.Text>
-              <Button variant="primary">Read More</Button>
+              <Button variant="success">Read More</Button>
             </Card.Body>
           </Card>
         ))
       ) : (
         <p>No blogs available</p>
       )}
+    </div>
     </div>
   );
 };

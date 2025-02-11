@@ -1,6 +1,24 @@
+.allBlogsPage {
+  background: linear-gradient(to bottom, #f5deb3, #ffd7a6, #ffa07a, #ff9900);
+}
+
 .allBlogsContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin-top: 20px;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.blogCard {
+  width: 18rem;
+  background: beige;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+  overflow: hidden;
+  display: flex;
+  margin: 1rem 0 1rem 0;
+  display: flex;
+  text-align: center;
 }
