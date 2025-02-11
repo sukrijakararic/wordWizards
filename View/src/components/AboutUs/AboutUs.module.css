@@ -1,5 +1,4 @@
 .aboutContainer {
-    max-width: 800px;
     margin: 50px auto;
     padding: 30px;
     background: #f9f9f9;
@@ -13,6 +12,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+
+  .aboutContent {
+    width: 80%;
   }
   
   .aboutTitle {
