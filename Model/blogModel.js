@@ -147,10 +147,11 @@ const giveUpDootBlog = async (req, res) => {
     return;
   }
   const { id } = req.body;
+  console.log(id);
   try {
     const postCheck = await db.query("SELECT * FROM blogs WHERE id = $1", [id]);
     if (postCheck.rows.length === 0) {
-      res.status(404).json({ message: "Blog post not found, check spelling." });
+      res.status(404).json({ message: "Blog post not found." });
       return;
     }
 
@@ -158,7 +159,7 @@ const giveUpDootBlog = async (req, res) => {
       "UPDATE blogs SET updoots = updoots + 1 WHERE id = $1 RETURNING *",
       [id]
     );
-    res.status(200).json(result.rows);
+    res.status(200).json({message: "Updoot given"});
   } catch (err) {
     console.log(err);
   }
@@ -173,7 +174,7 @@ const giveDownDootBlog = async (req, res) => {
   try {
     const postCheck = await db.query("SELECT * FROM blogs WHERE id = $1", [id]);
     if (postCheck.rows.length === 0) {
-      res.status(404).json({ message: "Blog post not found, check spelling." });
+      res.status(404).json({ message: "Blog post not found." });
       return;
     }
 

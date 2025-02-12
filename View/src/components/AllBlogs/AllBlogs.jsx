@@ -21,7 +21,6 @@ export const AllBlogs = () => {
     try {
       const response = await getAllBlogs();
       setAllBlogs(response);
-      console.log(response);
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
     }
