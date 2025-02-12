@@ -1,25 +1,35 @@
 import React, { useContext } from "react";
 import { SelectedBlogContext } from "../../context-api/SelectedBlogContext";
 import styles from "./SelectedBlog.module.css";
-import { giveUpDootBlog } from "../../utils/services";
+import { giveUpDootBlog, giveDownDootBlog } from "../../utils/services";
 
 export const SelectedBlog = () => {
   const { blog } = useContext(SelectedBlogContext);
 
   const handleBlogUpdoot = async (id) => {
     try {
-      console.log(id);
+      
       const response = await giveUpDootBlog(id);
-      console.log(response);
+      
     } catch (error) {
       console.error("Error giving up doot:", error);
     }
   };
 
-  console.log(blog);
+  const handleBlogDownDoot = async (id) => {  
+    try {
+      
+      const response = await giveDownDootBlog(id);
+    
+    } catch (error) {
+      console.error("Error giving down doot:", error);
+    }
+  }
+
+
   return (
     <div className={styles.selectedBlogPage}>
-      <div className={styles.selectedBlogContainer}> 
+      <div className={styles.selectedBlogContainer}>
       <h1 style={{ color: "#333", textAlign: "center" }}>{blog.title}</h1>
       <h6>By: {blog.username}</h6>
       <h7>tags - <span style={{ color: "orange", fontWeight: "bold" }}>{blog.tags ? blog.tags.join(', ') : 'No tags'}</span></h7>
@@ -29,6 +39,7 @@ export const SelectedBlog = () => {
       
       <p style={{textAlign: "center", width: "80%", margin: "0 auto"}}>{blog.content}</p>
       <button onClick={() => handleBlogUpdoot(blog.id)}>Give Up Doot</button>
+      <button onClick={() => handleBlogDownDoot(blog.id)}>Give Down Doot</button>
       </div>
     </div>
   );

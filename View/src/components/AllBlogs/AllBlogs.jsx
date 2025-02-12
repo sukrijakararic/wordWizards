@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import { BlogsContext } from "../../context-api/BlogsContext";
 import { SelectedBlogContext } from "../../context-api/SelectedBlogContext";
 import { useNavigate } from "react-router-dom";
+import { BlogSort } from "../BlogSort/BlogSort";
 
 export const AllBlogs = () => {
   const { allBlogs, setAllBlogs } = useContext(BlogsContext);
@@ -32,7 +33,7 @@ export const AllBlogs = () => {
 
   return (
     <div className={styles.allBlogsPage}>
-      <h5>Sort By</h5>
+    <BlogSort />
     <div className={styles.allBlogsContainer}>
       {allBlogs.length > 0 ? (
         allBlogs.map((blog) => (

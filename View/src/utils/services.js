@@ -120,3 +120,48 @@ export const giveUpDootBlog = async (id) => {
     throw error;
   }
 };
+
+export const giveDownDootBlog = async (id) => {
+  try {
+    const response = await fetch(`/api/giveDownDootBlog`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error giving down doot:", error);
+    throw error;
+  }
+};
+
+export const blogsByDoots = async () => {
+  try {
+    const response = await fetch("/api/blogsByDoots");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error getting blogs by doots:", error);
+    throw error;
+  }
+};
+
+export const getBlogByTagDoots = async (tags) => {
+  try {
+    const response = await fetch(`/api/blogsByTagsDoots`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tags }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error getting blog by tag and doots:", error);
+    throw error;
+  }
+};
