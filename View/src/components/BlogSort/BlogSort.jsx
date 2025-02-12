@@ -37,7 +37,7 @@ export const BlogSort = () => {
   };
 
   return (
-    <div>
+    <div className={styles.blogSortContainer}>
       <DropdownButton
         id="dropdown-basic-button"
         variant="warning"
@@ -50,7 +50,6 @@ export const BlogSort = () => {
         <Dropdown.Item onClick={() => fetchAllBlogs()}>
           Most Recent
         </Dropdown.Item>
-        <Dropdown.Item>Something else</Dropdown.Item>
         <Dropdown.Divider />
         <FloatingLabel
           controlId="floatingInput"
