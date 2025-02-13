@@ -1,6 +1,7 @@
 .allBlogsPage {
-  background: linear-gradient(to bottom, #f5deb3, #ffd7a6, #ffa07a, #ff9900);
+  background-image: linear-gradient(to bottom, #fff, #f5deb3);
   min-height: 100vh;
+  border-radius: 1rem;
 }
 
 .allBlogsContainer {

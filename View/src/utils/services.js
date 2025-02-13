@@ -165,3 +165,14 @@ export const getBlogByTagDoots = async (tags) => {
     throw error;
   }
 };
+
+export const getMyBlogs = async (blog) => {
+  try {    
+    const response = await fetch(`/api/myBlogs`)
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error getting blog by tag and doots:", error);
+    throw error;
+  }
+};

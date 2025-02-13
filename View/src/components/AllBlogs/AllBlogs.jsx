@@ -21,6 +21,7 @@ export const AllBlogs = () => {
   const fetchAllBlogs = async () => {
     try {
       const response = await getAllBlogs();
+      console.log(response);
       setAllBlogs(response);
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
@@ -41,8 +42,11 @@ export const AllBlogs = () => {
             <Card.Body>
               <Card.Title style={{ }}>{blog.title}</Card.Title>
               <Card.Text >By <span style={{ color: "green", fontWeight: "bold" }}>{blog.username}</span></Card.Text>
-              <Card.Text style={{ textDecoration: "underline" }}>UpDoots: <span style={{ color: "green", fontWeight: "bold" }}>{blog.updoots}</span></Card.Text>
-              <Card.Text>Tags: <span style={{ color: "orange", fontWeight: "bold" }}>{blog.tags ? blog.tags.join(', ') : 'No tags'}</span></Card.Text>
+              <Card.Text>{blog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{blog.updoots} Updoots</span></h6> : <h6 style={{ color: "#666" }}>No Updoots yet</h6>}</Card.Text>
+              <Card.Text>Tags: <span style={{ color: "orange", fontWeight: "bold" }}>
+                {(!blog.tags || blog.tags.length === 0) ? 'No tags' : blog.tags.join(', ')}
+                </span>
+                </Card.Text>
               <Button variant="success" onClick={() => handleBlogSet(blog)}>Read More</Button>
             </Card.Body>
           </Card>
@@ -54,3 +58,4 @@ export const AllBlogs = () => {
     </div>
   );
 };
+

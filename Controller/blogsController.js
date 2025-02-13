@@ -15,7 +15,7 @@ const {
 } = require("../Model/blogModel");
 
 blogRouter.get("/allBlogs", getAllBlogs); //done
-blogRouter.get("/myBlogs", getMyBlogs);
+blogRouter.get("/myBlogs", getMyBlogs); //done
 blogRouter.get("/blogsByDoots", getBlogsByDoots); //done
 // blogRouter.get("/blogsByTagsCreated", getBlogsByTagsOrderedByCreated);
 blogRouter.post("/blogsByTagsDoots", getBlogsByTagsOrderedByDoots); //done
