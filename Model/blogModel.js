@@ -159,7 +159,7 @@ const giveUpDootBlog = async (req, res) => {
       "UPDATE blogs SET updoots = updoots + 1 WHERE id = $1 RETURNING *",
       [id]
     );
-    res.status(200).json({message: "Updoot given"});
+    res.status(200).json(result.rows);
   } catch (err) {
     console.log(err);
   }
@@ -182,7 +182,7 @@ const giveDownDootBlog = async (req, res) => {
       "UPDATE blogs SET updoots = updoots - 1 WHERE id = $1 RETURNING *",
       [id]
     );
-    res.status(200).json(result.rows);
+    res.status(200).json(result.rows[0]);
   } catch (err) {
     console.log(err);
   }
