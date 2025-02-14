@@ -40,9 +40,11 @@ export const SelectedBlog = () => {
         <h6>Written on <span style={{ color: "green", fontWeight: "bold" }}>{new Date(blog.created_at).toLocaleDateString()}</span></h6>
         {blog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{blog.updoots} Updoots</span></h6> : <h6 style={{ color: "#666" }}>No Updoots yet</h6>}
         <hr style={{border: "1px solid #333", width: "90%" }}/>
-        <p style={{textAlign: "center", width: "80%", margin: "0 auto"}}>{blog.content}</p>
-        <Button onClick={() => handleBlogUpdoot(blog.id)} disabled={hasVoted && voteType === 'updoot'}>Give Up Doot</Button>
-        <Button onClick={() => handleBlogDownDoot(blog.id)} disabled={hasVoted && voteType === 'downdoot'}>Give Down Doot</Button>
+        <p style={{textAlign: "center", width: "80%", margin: "0 auto", minHeight: "70vh"}}>{blog.content}</p>
+        <div style={{display: "flex", justifyContent: "center", gap: "10px"}}>
+        <Button variant="success" onClick={() => handleBlogUpdoot(blog.id)} disabled={hasVoted && voteType === 'updoot'}>Give Up Doot</Button>
+        <Button variant="danger" onClick={() => handleBlogDownDoot(blog.id)} disabled={hasVoted && voteType === 'downdoot'}>Give Down Doot</Button>
+        </div>
       </div>
     </div>
   );

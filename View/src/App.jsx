@@ -16,7 +16,8 @@ import { Profile } from "./components/profile/Profile";
 import { AboutUs } from "./components/AboutUs/AboutUs";
 import { AllBlogs } from "./components/AllBlogs/AllBlogs";
 import { CreateBlog } from "./components/CreateBlog/CreateBlog";
-import { SelectedBlog } from "./components/SelectedBlog/SelectedBlog";
+import { SelectedBlog } from "./components/SelectedBlog/selectedBlog";
+import { MySelectedBlog } from "./components/MySelectedBlog/MySelectedBlog";
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +40,14 @@ const appRouter = createBrowserRouter(
         element={
           <RequireAuth>
             <CreateBlog />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/mySelectedBlog"
+        element={
+          <RequireAuth>
+            <MySelectedBlog />
           </RequireAuth>
         }
       />

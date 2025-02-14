@@ -10,8 +10,8 @@
   justify-content: center;
   margin-top: 1rem;
   gap: 1rem;
-
 }
+
 
 .blogCard {
   width: 18rem;
@@ -24,4 +24,8 @@
   margin: 1rem 0 1rem 0;
   display: flex;
   text-align: center;
+}
+
+.blogCard:hover {
+  transform: scale(1.05);
 }

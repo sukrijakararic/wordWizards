@@ -176,3 +176,37 @@ export const getMyBlogs = async (blog) => {
     throw error;
   }
 };
+
+export const deleteBlog = async (id, title) => {
+  try {
+    const response = await fetch(`/api/deleteBlog`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, title }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    throw error;
+  }
+};
+
+export const updateBlog = async (blog) => {
+  try {
+    const response = await fetch(`/api/updateBlog`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(blog),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating blog:", error);
+    throw error;
+  }
+};

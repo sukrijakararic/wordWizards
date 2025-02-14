@@ -22,8 +22,8 @@ blogRouter.post("/blogsByTagsDoots", getBlogsByTagsOrderedByDoots); //done
 blogRouter.post("/createBlog", createBlog); //done
 blogRouter.put("/giveUpDootBlog", giveUpDootBlog); // done
 blogRouter.put("/giveDownDootBlog", giveDownDootBlog); //done
-blogRouter.put("/updateBlog", updateBlogPost);
+blogRouter.put("/updateBlog", updateBlogPost); //done
 //blogRouter.put("/addTagToBlog", addTagToBlog);
-blogRouter.delete("/deleteBlog", deleteBlogPost);
+blogRouter.delete("/deleteBlog", deleteBlogPost); //done
 
 module.exports = blogRouter;

@@ -20,7 +20,7 @@ const getMyBlogs = async (req, res) => {
   const { id } = req.user;
   try {
     const result = await db.query(
-      "SELECT blogs.*, users.username FROM blogs inner join users on blogs.user_id = users.id WHERE blogs.user_id = $1",
+      "SELECT blogs.*, users.username FROM blogs inner join users on blogs.user_id = users.id WHERE blogs.user_id = $1 order by blogs.created_at desc",
       [id]
     );
     if (result.rows.length === 0) {
