@@ -17,7 +17,6 @@ const Navigate = useNavigate();
     try {
       const response = await getMyBlogs();
       setMyBlogs(response);
-      console.log("My blogs:", response);
     } catch (error) {
       console.error("Error getting my blogs:", error);
     }

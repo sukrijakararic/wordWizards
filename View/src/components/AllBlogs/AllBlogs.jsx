@@ -21,7 +21,6 @@ export const AllBlogs = () => {
   const fetchAllBlogs = async () => {
     try {
       const response = await getAllBlogs();
-      console.log(response);
       setAllBlogs(response);
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
