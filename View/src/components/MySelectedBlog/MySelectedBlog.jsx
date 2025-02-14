@@ -35,7 +35,7 @@ export const MySelectedBlog = () => {
 
   return (
     <div className={styles.mySelectedBlogPage}>
-      <div className={styles.mySelectedBlogContainer}>
+      <div className={styles.editBlog}>
         {isEditing ? (
           <div>
             <Form>
@@ -43,7 +43,7 @@ export const MySelectedBlog = () => {
                 <Form.Label>Editing blog post:</Form.Label>
                 <Form.Control
                   as="textarea"
-                  rows={15}
+                  rows={20}
                   value={newContent}
                   onChange={(e) => setNewContent(e.target.value)}
                 />
@@ -61,7 +61,7 @@ export const MySelectedBlog = () => {
             <h6>Written on <span style={{ color: "green", fontWeight: "bold" }}>{new Date(mySelectedBlog.created_at).toLocaleDateString()}</span></h6>
             {mySelectedBlog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{mySelectedBlog.updoots} Updoots</span></h6> : <h6 style={{ color: "#666" }}>No Updoots yet</h6>}
             <hr style={{border: "1px solid #333", width: "90%" }}/>
-            <p style={{textAlign: "center", width: "80%", margin: "0 auto", minHeight: "70vh"}}>{mySelectedBlog.content}</p>
+            <p className={styles.mySelectedBlogContent}>{mySelectedBlog.content}</p>
             <div style={{display: "flex", justifyContent: "center", gap: "10px"}}>
             <Button variant="success" onClick={() => setIsEditing(true)}>Edit Blog</Button>
             <Button variant="danger" onClick={() => handleDeleteBlog(mySelectedBlog.id, mySelectedBlog.title) }>Delete Blog</Button>

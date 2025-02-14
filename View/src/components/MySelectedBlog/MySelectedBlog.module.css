@@ -7,4 +7,20 @@
 
 .mySelectedBlogContainer {
     margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.editBlog {
+   text-align: center;
+    margin: 1rem;
+}
+
+.mySelectedBlogContent {
+    margin: 1rem;
+    text-align: center;
+    width: 80%;
+    min-height: 70vh;
 }
