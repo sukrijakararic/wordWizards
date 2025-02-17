@@ -15,6 +15,7 @@ export const MySelectedBlog = () => {
 
   const handleDeleteBlog = async (id, title) => {
     const result = await deleteBlog(id, title);
+    console.log(result);
     Navigate("/profile");
   };
 
