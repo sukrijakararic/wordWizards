@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { getBlogComments, createComment } from "../../utils/services";
+import {
+  getBlogComments,
+  createComment,
+  upDootComment,
+} from "../../utils/services";
 import { SelectedBlogContext } from "../../context-api/SelectedBlogContext";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -56,6 +60,23 @@ export const BlogComments = () => {
     }
   };
 
+  const handleUpDootComment = async (comment_id) => {
+    try {
+      const response = await upDootComment(comment_id);
+      console.log(response.message);
+      if (response.message === "Please log in to upDoot a comment") {
+        document.getElementById("responseStatusCommentDoot").innerHTML =
+          "please log in to upDoot a comment";
+        document.getElementById("responseStatusCommentDoot").style.color =
+          "red";
+        return;
+      }
+      fetchComments();
+    } catch (error) {
+      console.error("Error up dooting comment:", error);
+    }
+  };
+
   return (
     <div className={styles.commentsContainer}>
       <div className={styles.addComment}>
@@ -95,21 +116,26 @@ export const BlogComments = () => {
               <Card.Subtitle className="mb-2 text-muted">
                 {comment.username}
               </Card.Subtitle>
-              <Card.Subtitle style={{ marginLeft: "5px" }} className="mb-2 text-muted">
+              <Card.Subtitle
+                style={{ marginLeft: "5px" }}
+                className="mb-2 text-muted"
+              >
                 {comment.updoots
-                  ? "upDoots" + comment.updoots
+                  ? "upDoots: " + comment.updoots
                   : "no upDoots yet"}
               </Card.Subtitle>
               <Card.Link></Card.Link>
               <Button
                 style={{ marginRight: "10px", padding: "5px" }}
                 variant="success"
+                onClick={() => handleUpDootComment(comment.id)}
               >
                 upDoot
               </Button>
               <Button style={{ padding: "5px" }} variant="danger">
                 downDoot
               </Button>
+              <h6 id="responseStatusCommentDoot"></h6>
             </Card.Body>
           </Card>
         ))

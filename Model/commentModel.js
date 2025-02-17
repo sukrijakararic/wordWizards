@@ -56,7 +56,7 @@ const sortCommentsByCreated = async (req, res) => {
 
 const commentUpDoot = async (req, res) => {
     if (!req.user) {
-        res.status(401).json({ message: "Please log in to doot a comment" });
+        res.status(401).json({ message: "Please log in to upDoot a comment" });
         return;
     }
     const { id } = req.user;

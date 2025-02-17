@@ -244,3 +244,20 @@ export const getBlogComments = async (blog_id) => {
     throw error;
   }
 };
+
+export const upDootComment = async (comment_id) => {
+  try {
+    const response = await fetch(`/api/commentUpDoot`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({comment_id}),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error up dooting comment:", error);
+    throw error;
+  }
+};
