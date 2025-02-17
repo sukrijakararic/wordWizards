@@ -9,10 +9,9 @@ import {
 import { MySelectedBlogContext } from "../../context-api/MySelectedBlogContext";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import styles from "./BlogComments.module.css";
+import styles from "./MyBlogComments.module.css";
 import { BlogCommentsContext } from "../../context-api/BlogCommentsContext";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
