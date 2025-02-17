@@ -41,7 +41,7 @@ export const AllBlogs = () => {
             <Card.Body>
               <Card.Title style={{ }}>{blog.title}</Card.Title>
               <Card.Text >By <span style={{ color: "green", fontWeight: "bold" }}>{blog.username}</span></Card.Text>
-              <Card.Text>{blog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{blog.updoots} Updoots</span></h6> : <h6 style={{ color: "#666" }}>No Updoots yet</h6>}</Card.Text>
+              <Card.Text>{blog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{blog.updoots} upDoots</span></h6> : <h6 style={{ color: "#666" }}>No upDoots yet</h6>}</Card.Text>
               <Card.Text>Tags: <span style={{ color: "orange", fontWeight: "bold" }}>
                 {(!blog.tags || blog.tags.length === 0) ? 'No tags' : blog.tags.join(', ')}
                 </span>

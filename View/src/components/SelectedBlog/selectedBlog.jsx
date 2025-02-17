@@ -49,7 +49,7 @@ export const SelectedBlog = () => {
         <h6>By: {blog.username}</h6>
         <h7>Tags: <span style={{ color: "orange", fontWeight: "bold" }}>{(!blog.tags || blog.tags.length === 0) ? 'No tags' : blog.tags.join(', ')}</span></h7>
         <h6>Written on <span style={{ color: "green", fontWeight: "bold" }}>{new Date(blog.created_at).toLocaleDateString()}</span></h6>
-        {blog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{blog.updoots} Updoots</span></h6> : <h6 style={{ color: "#666" }}>No Updoots yet</h6>}
+        {blog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{blog.updoots} upDoots</span></h6> : <h6 style={{ color: "#666" }}>No upDoots yet</h6>}
         <hr style={{border: "1px solid #333", width: "90%" }}/>
         <p className={styles.selectedBlogContent}>{blog.content}</p>
         <div style={{display: "flex", justifyContent: "center", gap: "10px"}}>

@@ -89,16 +89,16 @@ export const BlogComments = () => {
         <p>No comments yet</p>
       ) : (
         blogComments.map((comment) => (
-          <Card style={{ width: "18rem" }}>
+          <Card style={{ width: "18rem", margin: "1rem" }}>
             <Card.Body key={comment.id}>
-              <Card.Text>{comment.content}</Card.Text>
+              <Card.Text>- {comment.content}</Card.Text>
               <Card.Subtitle className="mb-2 text-muted">
                 {comment.username}
               </Card.Subtitle>
-              <Card.Subtitle className="mb-2 text-muted">
+              <Card.Subtitle style={{ marginLeft: "5px" }} className="mb-2 text-muted">
                 {comment.updoots
                   ? "upDoots" + comment.updoots
-                  : "no updoots yet"}
+                  : "no upDoots yet"}
               </Card.Subtitle>
               <Card.Link></Card.Link>
               <Button

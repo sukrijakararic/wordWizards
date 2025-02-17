@@ -41,7 +41,7 @@ const Navigate = useNavigate();
           <Card.Body>
             <Card.Title className={styles.myBlogTitle}>{blog.title}</Card.Title>
             <Card.Text className={styles.myBlogAuthor}>{blog.username}</Card.Text>
-            <Card.Text>{blog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{blog.updoots} Updoots</span></h6> : <h6 style={{ color: "#666" }}>No Updoots yet</h6>}</Card.Text>
+            <Card.Text>{blog.updoots !== 0 ? <h6><span style={{ color: "dodgerblue", fontWeight: "bold" }}>{blog.updoots} upDoots</span></h6> : <h6 style={{ color: "#666" }}>No upDoots yet</h6>}</Card.Text>
             <Card.Text>Tags: <span className={styles.myBlogTags}>{(!blog.tags || blog.tags.length === 0) ? 'No tags' : blog.tags.join(', ')}</span></Card.Text>
 
             <Button variant="primary" onClick={() => handleBlogSet(blog)}>View your blog</Button>
