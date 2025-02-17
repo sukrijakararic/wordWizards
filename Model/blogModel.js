@@ -167,7 +167,7 @@ const giveUpDootBlog = async (req, res) => {
 
 const giveDownDootBlog = async (req, res) => {
   if (!req.user) {
-    res.status(401).json({ message: "Please log in to give an updoot" });
+    res.status(401).json({ message: "Please log in to give a downDoot" });
     return;
   }
   const { id } = req.body;

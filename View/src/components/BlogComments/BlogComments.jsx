@@ -29,13 +29,25 @@ export const BlogComments = () => {
   }, []);
 
   const handleCreateComment = async () => {
-    if (!newComment) return;
+    if (!newComment) {
+      document.getElementById("responseStatusComment").innerHTML =
+        "Comment cannot be empty";
+      document.getElementById("responseStatusComment").style.color = "red";
+      return;
+    }
     try {
       const comment = {
         content: newComment,
         blog_id: blog.id,
       };
       const response = await createComment(comment);
+      console.log(response.message);
+      if (response.message === "Please log in to create a comment") {
+        document.getElementById("responseStatusComment").innerHTML =
+          "please log in to comment";
+        document.getElementById("responseStatusComment").style.color = "red";
+        return;
+      }
       setIsCommenting(false);
       setNewComment("");
       fetchComments();
@@ -48,7 +60,7 @@ export const BlogComments = () => {
     <div className={styles.commentsContainer}>
       <div className={styles.addComment}>
         <h2>Comments</h2>
-        <Button variant="success" onClick={() => setIsCommenting(true)}>
+        <Button variant="primary" onClick={() => setIsCommenting(true)}>
           Add Comment
         </Button>
       </div>
@@ -58,6 +70,7 @@ export const BlogComments = () => {
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>Add your comment:</Form.Label>
+              <h6 id="responseStatusComment"></h6>
               <Form.Control
                 as="textarea"
                 rows={2}

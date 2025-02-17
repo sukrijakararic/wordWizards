@@ -14,6 +14,11 @@ export const SelectedBlog = () => {
     if (hasVoted && voteType === 'updoot') return;
     try {
       const response = await giveUpDootBlog(id);
+      if (response.message === "Please log in to give an updoot") {
+        document.getElementById("responseStatus").innerHTML = "please log in to give an upDoot";
+        document.getElementById("responseStatus").style.color = "red";
+        return;
+      }
       setHasVoted(true);
       setVoteType('updoot');
     } catch (error) {
@@ -25,6 +30,11 @@ export const SelectedBlog = () => {
     if (hasVoted && voteType === 'downdoot') return;
     try {
       const response = await giveDownDootBlog(id);
+      if (response.message === "Please log in to give a downDoot") {
+        document.getElementById("responseStatus").innerHTML = response.message;
+        document.getElementById("responseStatus").style.color = "red";
+        return;
+      }
       setHasVoted(true);
       setVoteType('downdoot');
     } catch (error) {
@@ -43,9 +53,10 @@ export const SelectedBlog = () => {
         <hr style={{border: "1px solid #333", width: "90%" }}/>
         <p className={styles.selectedBlogContent}>{blog.content}</p>
         <div style={{display: "flex", justifyContent: "center", gap: "10px"}}>
-        <Button variant="success" onClick={() => handleBlogUpdoot(blog.id)} disabled={hasVoted && voteType === 'updoot'}>Give Up Doot</Button>
-        <Button variant="danger" onClick={() => handleBlogDownDoot(blog.id)} disabled={hasVoted && voteType === 'downdoot'}>Give Down Doot</Button>
+        <Button variant="success" onClick={() => handleBlogUpdoot(blog.id)} disabled={hasVoted && voteType === 'updoot'}>Give upDoot</Button>
+        <Button variant="danger" onClick={() => handleBlogDownDoot(blog.id)} disabled={hasVoted && voteType === 'downdoot'}>Give downDoot</Button>
         </div>
+        <h6 id="responseStatus"></h6>
       </div>
       <BlogComments />
     </div>
