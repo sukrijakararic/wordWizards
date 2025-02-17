@@ -3,6 +3,7 @@ import {
   getBlogComments,
   createComment,
   upDootComment,
+  downDootComment,
 } from "../../utils/services";
 import { SelectedBlogContext } from "../../context-api/SelectedBlogContext";
 import Card from "react-bootstrap/Card";
@@ -17,6 +18,8 @@ export const BlogComments = () => {
   const { blogComments, setBlogComments } = useContext(BlogCommentsContext);
   const [isCommenting, setIsCommenting] = useState(false);
   const [newComment, setNewComment] = useState("");
+  const [commentUpDoot, setCommentUpDoot] = useState({});
+  const [commentDownDoot, setCommentDownDoot] = useState({});
   const Navigate = useNavigate();
 
   const fetchComments = async () => {
@@ -45,7 +48,6 @@ export const BlogComments = () => {
         blog_id: blog.id,
       };
       const response = await createComment(comment);
-      console.log(response.message);
       if (response.message === "Please log in to create a comment") {
         document.getElementById("responseStatusComment").innerHTML =
           "please log in to comment";
@@ -63,7 +65,6 @@ export const BlogComments = () => {
   const handleUpDootComment = async (comment_id) => {
     try {
       const response = await upDootComment(comment_id);
-      console.log(response.message);
       if (response.message === "Please log in to upDoot a comment") {
         document.getElementById("responseStatusCommentDoot").innerHTML =
           "please log in to upDoot a comment";
@@ -71,9 +72,29 @@ export const BlogComments = () => {
           "red";
         return;
       }
+      setCommentUpDoot((prev) => ({ ...prev, [comment_id]: true }));
+      setCommentDownDoot((prev) => ({ ...prev, [comment_id]: false }));
       fetchComments();
     } catch (error) {
       console.error("Error up dooting comment:", error);
+    }
+  };
+
+  const handleDownDootComment = async (comment_id) => {
+    try {
+      const response = await downDootComment(comment_id);
+      if (response.message === "Please log in to downDoot a comment") {
+        document.getElementById("responseStatusCommentDoot").innerHTML =
+          "please log in to downDoot a comment";
+        document.getElementById("responseStatusCommentDoot").style.color =
+          "red";
+        return;
+      }
+      setCommentDownDoot((prev) => ({ ...prev, [comment_id]: true }));
+      setCommentUpDoot((prev) => ({ ...prev, [comment_id]: false }));
+      fetchComments();
+    } catch (error) {
+      console.error("Error down dooting comment:", error);
     }
   };
 
@@ -129,10 +150,16 @@ export const BlogComments = () => {
                 style={{ marginRight: "10px", padding: "5px" }}
                 variant="success"
                 onClick={() => handleUpDootComment(comment.id)}
+                disabled={commentUpDoot[comment.id]}
               >
                 upDoot
               </Button>
-              <Button style={{ padding: "5px" }} variant="danger">
+              <Button
+                style={{ padding: "5px" }}
+                variant="danger"
+                onClick={() => handleDownDootComment(comment.id)}
+                disabled={commentDownDoot[comment.id]}
+              >
                 downDoot
               </Button>
               <h6 id="responseStatusCommentDoot"></h6>
@@ -143,3 +170,4 @@ export const BlogComments = () => {
     </div>
   );
 };
+

@@ -75,7 +75,7 @@ const commentUpDoot = async (req, res) => {
 
 const commentDownDoot = async (req, res) => {
     if (!req.user) {
-        res.status(401).json({ message: "Please log in to doot a comment" });
+        res.status(401).json({ message: "Please log in to downDoot a comment" });
         return;
     }
     const { id } = req.user;
