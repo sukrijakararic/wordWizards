@@ -147,12 +147,13 @@ export const MyBlogComments = () => {
           </Tab>
         </Tabs>
         <Button
-          style={{ marginTop: "10px" }}
+          style={{ margin: "10px" }}
           variant="primary"
           onClick={() => setIsCommenting(true)}
         >
           Add Comment
         </Button>
+        <h6 id="responseStatusCommentDoot"></h6>
       </div>
       <hr></hr>
       {isCommenting && (
@@ -209,7 +210,6 @@ export const MyBlogComments = () => {
               >
                 downDoot
               </Button>
-              <h6 id="responseStatusCommentDoot"></h6>
             </Card.Body>
           </Card>
         ))
