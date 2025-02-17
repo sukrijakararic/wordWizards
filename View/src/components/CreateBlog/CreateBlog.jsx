@@ -18,12 +18,11 @@ export const CreateBlog = () => {
       content: data.get("content"),
       tag: `{${selectedTags.join(",")}}`,
     };
-    console.log(blog);
     const response = await createBlog(blog);
     event.target.reset();
-    document.getElementById("responseStatus").textContent = response.message;
+    document.getElementById("responseStatusCreateBlog").textContent = response.message;
     if (response === "Blog post created") {
-      Navigate("/blogs");
+      Navigate("/profile");
     }
   };
 
@@ -78,10 +77,10 @@ export const CreateBlog = () => {
           </div>
         </Form.Group>
 
-        <Button variant="success" type="submit">
+        <Button style={{width: "15rem"}} variant="success" type="submit">
           Submit
         </Button>
-        <p id="responseStatus"></p>
+        <p id="responseStatusCreateBlog"></p>
       </Form>
     </div>
   );
