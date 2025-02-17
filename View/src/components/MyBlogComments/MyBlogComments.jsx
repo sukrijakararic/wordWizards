@@ -18,7 +18,6 @@ import Tabs from "react-bootstrap/Tabs";
 
 export const MyBlogComments = () => {
   const { mySelectedBlog } = useContext(MySelectedBlogContext);
-  console.log(mySelectedBlog);
   const { blogComments, setBlogComments } = useContext(BlogCommentsContext);
   const [isCommenting, setIsCommenting] = useState(false);
   const [newComment, setNewComment] = useState("");
@@ -28,7 +27,6 @@ export const MyBlogComments = () => {
 
   const fetchComments = async () => {
     try {
-      console.log(mySelectedBlog);
       const comments = await getBlogComments(mySelectedBlog.id);
       setBlogComments(comments);
     } catch (error) {
