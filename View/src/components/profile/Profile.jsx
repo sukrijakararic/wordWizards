@@ -5,8 +5,7 @@ import Card from "react-bootstrap/Card";
 import { UserContext } from "../../context-api/UserContext";
 import { getUser } from "../../utils/services";
 import { MyBlogs } from "../MyBlogs/MyBlogs";
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+import { MyComments } from "../MyComments/MyComments";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
@@ -49,7 +48,7 @@ export const Profile = () => {
         <MyBlogs />
       </Tab>
       <Tab eventKey="myComments" title="My Comments">
-        Tab content for Profile
+        <MyComments />
       </Tab>
     </Tabs>
 

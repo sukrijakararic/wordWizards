@@ -294,3 +294,14 @@ export const downDootComment = async (comment_id) => {
     throw error;
   }
 };
+
+export const getMyComments = async () => {
+  try {
+    const response = await fetch(`/api/myComments`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error getting my comments:", error);
+    throw error;
+  }
+};

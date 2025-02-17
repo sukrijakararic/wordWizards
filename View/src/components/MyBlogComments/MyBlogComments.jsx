@@ -193,7 +193,6 @@ export const MyBlogComments = () => {
                   ? "upDoots: " + comment.updoots
                   : "no upDoots yet"}
               </Card.Subtitle>
-              <Card.Link></Card.Link>
               <Button
                 style={{ marginRight: "10px", padding: "5px" }}
                 variant="success"
