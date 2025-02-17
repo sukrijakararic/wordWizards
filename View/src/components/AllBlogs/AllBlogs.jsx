@@ -33,6 +33,7 @@ export const AllBlogs = () => {
 
   return (
     <div className={styles.allBlogsPage}>
+      <h1 style={{ textAlign: "center" }}>All Blogs</h1>
     <BlogSort />
     <div className={styles.allBlogsContainer}>
       {allBlogs.length > 0 ? (

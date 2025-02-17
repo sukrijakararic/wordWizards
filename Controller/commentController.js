@@ -4,9 +4,9 @@ const { getCommentsByBlog, createComment, getMyComments, sortCommentsByCreated, 
 
 commentRouter.post("/commentsForBlog", getCommentsByBlog); //done
 commentRouter.get("/myComments", getMyComments);
-commentRouter.get("/commentsByCreated", sortCommentsByCreated);
-commentRouter.put("/commentUpDoot", commentUpDoot);
-commentRouter.put("/commentDownDoot", commentDownDoot);
+commentRouter.post("/commentsByCreated", sortCommentsByCreated);
+commentRouter.put("/commentUpDoot", commentUpDoot); //done
+commentRouter.put("/commentDownDoot", commentDownDoot); //done
 commentRouter.post("/createComment", createComment); //done
 commentRouter.put("/editComment", editComment);
 commentRouter.delete("/deleteComment", deleteComment);

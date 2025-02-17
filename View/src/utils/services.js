@@ -167,8 +167,8 @@ export const getBlogByTagDoots = async (tags) => {
 };
 
 export const getMyBlogs = async (blog) => {
-  try {    
-    const response = await fetch(`/api/myBlogs`)
+  try {
+    const response = await fetch(`/api/myBlogs`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -229,18 +229,34 @@ export const createComment = async (comment) => {
 };
 
 export const getBlogComments = async (blog_id) => {
-  try { 
+  try {
     const response = await fetch(`/api/commentsForBlog`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ blog_id }),
-    })
+    });
     const data = await response.json();
-    return data; 
+    return data;
   } catch (error) {
     console.error("Error getting blog comments:", error);
+    throw error;
+  }
+};
+export const mostRecentComments = async (blog_id) => {
+  try {
+    const response = await fetch(`/api/commentsByCreated`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ blog_id }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error getting most recent comments:", error);
     throw error;
   }
 };
@@ -252,7 +268,7 @@ export const upDootComment = async (comment_id) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({comment_id}),
+      body: JSON.stringify({ comment_id }),
     });
     const data = await response.json();
     return data;
@@ -268,8 +284,8 @@ export const downDootComment = async (comment_id) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-      },    
-      body: JSON.stringify({comment_id}),
+      },
+      body: JSON.stringify({ comment_id }),
     });
     const data = await response.json();
     return data;

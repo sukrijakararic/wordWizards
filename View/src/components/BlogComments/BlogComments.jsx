@@ -4,6 +4,7 @@ import {
   createComment,
   upDootComment,
   downDootComment,
+  mostRecentComments,
 } from "../../utils/services";
 import { SelectedBlogContext } from "../../context-api/SelectedBlogContext";
 import Card from "react-bootstrap/Card";
@@ -12,6 +13,8 @@ import styles from "./BlogComments.module.css";
 import { BlogCommentsContext } from "../../context-api/BlogCommentsContext";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 export const BlogComments = () => {
   const { blog } = useContext(SelectedBlogContext);
@@ -25,6 +28,15 @@ export const BlogComments = () => {
   const fetchComments = async () => {
     try {
       const comments = await getBlogComments(blog.id);
+      setBlogComments(comments);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+
+  const handleMostRecentComments = async () => {
+    try {
+      const comments = await mostRecentComments(blog.id);
       setBlogComments(comments);
     } catch (error) {
       console.error("Error fetching comments:", error);
@@ -101,8 +113,27 @@ export const BlogComments = () => {
   return (
     <div className={styles.commentsContainer}>
       <div className={styles.addComment}>
-        <h2>Comments</h2>
-        <Button variant="primary" onClick={() => setIsCommenting(true)}>
+      <h2>Comments</h2>
+      <Tabs
+        defaultActiveKey="doots"
+        id="uncontrolled-tab-example"
+        className="mb-3"
+        onSelect={(key) => {
+          if (key === "doots") {
+            fetchComments();
+          } else if (key === "recent") {
+            handleMostRecentComments();
+          }
+        }}
+      >
+        <Tab eventKey="doots" title="Most dooted">
+          Sorting comments by doots
+        </Tab>
+        <Tab eventKey="recent" title="Most recent">
+          Sorting comments by most recent
+        </Tab>
+      </Tabs>
+        <Button style={{ marginTop: "10px" }} variant="primary" onClick={() => setIsCommenting(true)}>
           Add Comment
         </Button>
       </div>
