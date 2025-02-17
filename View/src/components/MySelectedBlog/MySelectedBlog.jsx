@@ -5,6 +5,7 @@ import { deleteBlog, updateBlog } from "../../utils/services";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
+import { MyBlogComments } from "../MyBlogComments/MyBlogComments";
 
 export const MySelectedBlog = () => {
   const { mySelectedBlog, setMySelectedBlog } = useContext(MySelectedBlogContext);
@@ -68,6 +69,7 @@ export const MySelectedBlog = () => {
           </div>
         )}
       </div>
+      <MyBlogComments />
     </div>
   );
 };

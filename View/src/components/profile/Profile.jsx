@@ -7,6 +7,8 @@ import { getUser } from "../../utils/services";
 import { MyBlogs } from "../MyBlogs/MyBlogs";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 
 export const Profile = () => {
@@ -25,15 +27,9 @@ export const Profile = () => {
     <div className={styles.profileCard}>
       {loggedUser ? (
         <>
-        <Navbar className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home">Welcome to your profile</Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-          <Card style={{ width: "18rem" }} className={styles.profileContainer}>
+        <div className={styles.profileContainer}>
+          <h1>Profile</h1>
+          <Card style={{ width: "20rem" }} className={styles.profileContainer}>
             <Card.Header>
               <p className={styles.profileExtras}>Wizard Card</p>
             </Card.Header>
@@ -42,9 +38,22 @@ export const Profile = () => {
               <ListGroup.Item>Username: {loggedUser.username}</ListGroup.Item>
             </ListGroup>
           </Card>
-          <h1>My Blogs</h1>
-          <th></th>
-          <MyBlogs />
+          </div>
+          <Tabs
+      defaultActiveKey="myBlogs"
+      id="uncontrolled-tab-example"
+      className="mb-3"
+      style={{ margin: "1rem" }}
+    >
+      <Tab eventKey="myBlogs" title="My Blogs">
+        <MyBlogs />
+      </Tab>
+      <Tab eventKey="myComments" title="My Comments">
+        Tab content for Profile
+      </Tab>
+    </Tabs>
+
+          
         </>
       ) : (
         <p>Loading...</p>

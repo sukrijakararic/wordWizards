@@ -6,7 +6,7 @@ import {
   downDootComment,
   mostRecentComments,
 } from "../../utils/services";
-import { SelectedBlogContext } from "../../context-api/SelectedBlogContext";
+import { MySelectedBlogContext } from "../../context-api/MySelectedBlogContext";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import styles from "./BlogComments.module.css";
@@ -16,19 +16,20 @@ import { useNavigate } from "react-router-dom";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
-export const BlogComments = () => {
-  const { blog } = useContext(SelectedBlogContext);
+export const MyBlogComments = () => {
+  const { mySelectedBlog } = useContext(MySelectedBlogContext);
+  console.log(mySelectedBlog);
   const { blogComments, setBlogComments } = useContext(BlogCommentsContext);
   const [isCommenting, setIsCommenting] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [commentUpDoot, setCommentUpDoot] = useState({});
   const [commentDownDoot, setCommentDownDoot] = useState({});
   const [commmentSort, setCommmentSort] = useState("mostDooted");
-  const Navigate = useNavigate();
 
   const fetchComments = async () => {
     try {
-      const comments = await getBlogComments(blog.id);
+      console.log(mySelectedBlog);
+      const comments = await getBlogComments(mySelectedBlog.id);
       setBlogComments(comments);
     } catch (error) {
       console.error("Error fetching comments:", error);
@@ -37,7 +38,7 @@ export const BlogComments = () => {
 
   const handleMostRecentComments = async () => {
     try {
-      const comments = await mostRecentComments(blog.id);
+      const comments = await mostRecentComments(mySelectedBlog.id);
       setBlogComments(comments);
     } catch (error) {
       console.error("Error fetching comments:", error);
@@ -58,7 +59,7 @@ export const BlogComments = () => {
     try {
       const comment = {
         content: newComment,
-        blog_id: blog.id,
+        blog_id: mySelectedBlog.id,
       };
       const response = await createComment(comment);
       if (response.message === "Please log in to create a comment") {

@@ -49,7 +49,7 @@ const Navigate = useNavigate();
         </Card>
         ))
       ) : (
-        <p>No blogs found.</p>
+        <h3>No blogs found.</h3>
       )}    
     </div>
   )
