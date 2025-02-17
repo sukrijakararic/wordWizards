@@ -210,3 +210,37 @@ export const updateBlog = async (blog) => {
     throw error;
   }
 };
+
+export const createComment = async (comment) => {
+  try {
+    const response = await fetch(`/api/createComment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error creating comment:", error);
+    throw error;
+  }
+};
+
+export const getBlogComments = async (blog_id) => {
+  try { 
+    const response = await fetch(`/api/commentsForBlog`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ blog_id }),
+    })
+    const data = await response.json();
+    return data; 
+  } catch (error) {
+    console.error("Error getting blog comments:", error);
+    throw error;
+  }
+};

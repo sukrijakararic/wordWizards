@@ -5,6 +5,7 @@ import { BlogsProvider } from "./BlogsContext";
 import { SelectedBlogProvider } from "./SelectedBlogContext";
 import { MyBlogsProvider } from "./MyBlogsContext";
 import { MySelectedBlogProvider } from "./MySelectedBlogContext";
+import { BlogCommentsProvider } from "./BlogCommentsContext";
 export const ContextProviders = ({ children }) => {
   return (
     <div>
@@ -13,7 +14,9 @@ export const ContextProviders = ({ children }) => {
           <SelectedBlogProvider>
             <MyBlogsProvider>
               <MySelectedBlogProvider>
-              <UserProvider>{children}</UserProvider>
+                <BlogCommentsProvider>
+                  <UserProvider>{children}</UserProvider>
+                </BlogCommentsProvider>
               </MySelectedBlogProvider>
             </MyBlogsProvider>
           </SelectedBlogProvider>

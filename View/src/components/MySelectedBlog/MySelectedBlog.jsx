@@ -10,7 +10,6 @@ export const MySelectedBlog = () => {
   const { mySelectedBlog, setMySelectedBlog } = useContext(MySelectedBlogContext);
   const Navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState(mySelectedBlog.title);
   const [newContent, setNewContent] = useState(mySelectedBlog.content);
 
   const handleDeleteBlog = async (id, title) => {

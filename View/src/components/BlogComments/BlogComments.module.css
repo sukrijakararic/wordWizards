@@ -1,0 +1,21 @@
+.commentsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    padding: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    min-height: 20vh; 
+    border-bottom: 1px solid #ccc;
+    margin: 1rem;
+}
+
+.addComment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin: 1rem;
+    text-align: center;
+}

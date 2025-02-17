@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
     window.addEventListener('beforeunload', () => {
       setLoggedIn(false);
     });
-  }, [loggedIn]);
+  }, [loggedIn, setLoggedIn]);
 
   return (
     <AuthContext.Provider value={{ loggedIn, setLoggedIn }}>

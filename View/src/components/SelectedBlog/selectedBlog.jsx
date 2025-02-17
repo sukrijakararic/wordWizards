@@ -3,6 +3,7 @@ import { SelectedBlogContext } from "../../context-api/SelectedBlogContext";
 import styles from "./SelectedBlog.module.css";
 import { giveUpDootBlog, giveDownDootBlog } from "../../utils/services";
 import Button from 'react-bootstrap/Button';
+import { BlogComments } from "../BlogComments/BlogComments";
 
 export const SelectedBlog = () => {
   const { blog } = useContext(SelectedBlogContext);
@@ -46,6 +47,7 @@ export const SelectedBlog = () => {
         <Button variant="danger" onClick={() => handleBlogDownDoot(blog.id)} disabled={hasVoted && voteType === 'downdoot'}>Give Down Doot</Button>
         </div>
       </div>
+      <BlogComments />
     </div>
   );
 };
