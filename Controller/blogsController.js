@@ -15,17 +15,18 @@ const {
   //getBlogsByTagsOrderedByCreated,
 } = require("../Model/blogModel");
 
-blogRouter.get("/allBlogs", getAllBlogs); //done
+blogRouter.get("/allBlogs", getAllBlogs);
 blogRouter.post("/blogById", getBlogById);
-blogRouter.get("/myBlogs", getMyBlogs); //done
-blogRouter.get("/blogsByDoots", getBlogsByDoots); //done
+blogRouter.get("/myBlogs", getMyBlogs);
+blogRouter.get("/blogsByDoots", getBlogsByDoots);
 // blogRouter.get("/blogsByTagsCreated", getBlogsByTagsOrderedByCreated);
-blogRouter.post("/blogsByTagsDoots", getBlogsByTagsOrderedByDoots); //done
-blogRouter.post("/createBlog", createBlog); //done
-blogRouter.put("/giveUpDootBlog", giveUpDootBlog); // done
-blogRouter.put("/giveDownDootBlog", giveDownDootBlog); //done
-blogRouter.put("/updateBlog", updateBlogPost); //done
+blogRouter.post("/blogsByTagsDoots", getBlogsByTagsOrderedByDoots);
+blogRouter.post("/createBlog", createBlog);
+blogRouter.put("/giveUpDootBlog", giveUpDootBlog);
+blogRouter.put("/giveDownDootBlog", giveDownDootBlog);
+blogRouter.put("/updateBlog", updateBlogPost);
 //blogRouter.put("/addTagToBlog", addTagToBlog);
-blogRouter.delete("/deleteBlog", deleteBlogPost); //done
+blogRouter.delete("/deleteBlog", deleteBlogPost);
 
 module.exports = blogRouter;
+
