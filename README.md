@@ -53,7 +53,7 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-For any inquiries, please contact us at [contact@wordwizards.com](mailto:contact@wordwizards.com).
+For any inquiries, please contact us at [sukrijakararic1@gmail.com](mailto:sukrijakararic1@gmail.com).
 
 ---
 
