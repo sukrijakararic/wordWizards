@@ -3,7 +3,7 @@ const commentRouter = express.Router();
 const { getCommentsByBlog, createComment, getMyComments, sortCommentsByCreated, commentUpDoot, commentDownDoot, editComment, deleteComment } = require("../Model/commentModel");
 
 commentRouter.post("/commentsForBlog", getCommentsByBlog); //done
-commentRouter.get("/myComments", getMyComments);
+commentRouter.get("/myComments", getMyComments); //done
 commentRouter.post("/commentsByCreated", sortCommentsByCreated); //done
 commentRouter.put("/commentUpDoot", commentUpDoot); //done
 commentRouter.put("/commentDownDoot", commentDownDoot); //done
