@@ -12,6 +12,23 @@ const getAllBlogs = async (req, res) => {
   }
 };
 
+const getBlogById = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const result = await db.query(
+      "SELECT blogs.*, users.username FROM blogs inner join users on blogs.user_id = users.id WHERE blogs.id = $1",
+      [id]
+    );
+    if (result.rows.length === 0) {
+      res.status(404).json({ message: "No blog post found" });
+      return;
+    }
+    res.status(200).json(result.rows[0]);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const getMyBlogs = async (req, res) => {
   if (!req.user) {
     res.status(401).json({ message: "Please log in to view your blog posts" });
@@ -255,6 +272,7 @@ const getBlogsByTagsOrderedByCreated = async (req, res) => {
 
 module.exports = {
   getAllBlogs,
+  getBlogById,
   getMyBlogs,
   getBlogsByDoots,
   createBlog,

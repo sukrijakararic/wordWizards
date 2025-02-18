@@ -2,6 +2,7 @@ const express = require("express");
 const blogRouter = express.Router();
 const {
   getAllBlogs,
+  getBlogById,
   getMyBlogs,
   createBlog,
   updateBlogPost,
@@ -15,6 +16,7 @@ const {
 } = require("../Model/blogModel");
 
 blogRouter.get("/allBlogs", getAllBlogs); //done
+blogRouter.post("/blogById", getBlogById);
 blogRouter.get("/myBlogs", getMyBlogs); //done
 blogRouter.get("/blogsByDoots", getBlogsByDoots); //done
 // blogRouter.get("/blogsByTagsCreated", getBlogsByTagsOrderedByCreated);

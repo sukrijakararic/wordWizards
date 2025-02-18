@@ -70,6 +70,21 @@ export const getAllBlogs = async () => {
   }
 };
 
+export const getBlogById = async (id) => {
+  try {
+    const response = await fetch(`/api/blogById`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    }); 
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    }
+}
+
 export const createBlog = async (blog) => {
   try {
     const response = await fetch("/api/createBlog", {
@@ -302,6 +317,23 @@ export const getMyComments = async () => {
     return data;
   } catch (error) {
     console.error("Error getting my comments:", error);
+    throw error;
+  }
+};
+
+export const deleteComment = async (comment_id) => {
+  try {
+    const response = await fetch(`/api/deleteComment`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment_id }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error deleting comment:", error);
     throw error;
   }
 };
