@@ -2,6 +2,7 @@
 const passport = require("../strategies/main");
 const express = require("express");
 const googleRouter = express.Router();
+const { REDIRECTURL } = process.env
 
 
 googleRouter.get(
@@ -20,7 +21,7 @@ googleRouter.get(
     console.log("req.user: ", req.user);
     req.session.user = req.user;
     // make sure to change the redirect to root when pushing to production
-    res.status(200).redirect("localhost:5173");
+    res.status(200).redirect(REDIRECTURL);
   }
 );
 
