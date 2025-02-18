@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "./MyComments.module.css";
-import { getMyComments, deleteComment, getBlogById } from "../../utils/services";
+import { getMyComments, deleteComment, getBlogById, updateComment } from "../../utils/services";
 import Card from "react-bootstrap/Card";
 import { upDootComment, downDootComment } from "../../utils/services";
 import CloseButton from 'react-bootstrap/CloseButton';
@@ -12,7 +12,11 @@ export const MyComments = () => {
   const [comments, setComments] = useState([]);
   const [commentUpDoot, setCommentUpDoot] = useState({});
   const [commentDownDoot, setCommentDownDoot] = useState({});
-  const {setBlog } = useContext(SelectedBlogContext);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [newContent, setNewContent] = useState("");
+  console.log(comments);
+  const { setBlog } = useContext(SelectedBlogContext);
   const Navigate = useNavigate();
 
   const handleMyComments = async () => {
@@ -87,6 +91,31 @@ export const MyComments = () => {
     }
   };
 
+  const handleEditComment = (comment_id, content) => {
+    setIsEditing(true);
+    setEditingCommentId(comment_id);
+    setNewContent(content);
+  };
+
+  const handleUpdateComment = async (comment_id) => {
+    try {
+      const response = await updateComment({ comment_id, content: newContent });
+      if (response.message === "Please log in to edit a comment") {
+        document.getElementById("responseStatusCommentDoot").innerHTML =
+          "please log in to edit a comment";
+        document.getElementById("responseStatusCommentDoot").style.color =
+          "red";
+        return;
+      }
+      setIsEditing(false);
+      setEditingCommentId(null);
+      setNewContent("");
+      handleMyComments();
+    } catch (error) {
+      console.error("Error updating comment:", error);
+    }
+  };
+
   useEffect(() => {
     handleMyComments();
   }, []);
@@ -100,7 +129,23 @@ export const MyComments = () => {
           <Card key={comment.id} className={styles.myCommentCard}>
             <Card.Body>
               <Card.Title onClick={() => handleSelectBlog(comment.blog_id)} className={styles.myCommentTitle}>{comment.title}</Card.Title>
-              <Card.Text>"{comment.content}"</Card.Text>
+              {isEditing && editingCommentId === comment.id ? (
+                <div className={styles.editCommentContainer}>
+                  <textarea
+                    type="text"
+                    value={newContent}
+                    rows={4}
+                    maxLength={300}
+                    onChange={(e) => setNewContent(e.target.value)}
+                  />
+                  <div className={styles.editCommentButtons}>
+                  <Button variant="success" onClick={() => handleUpdateComment(comment.id)}>Save</Button>
+                  <Button variant="secondary" onClick={() => setIsEditing(false)}>Cancel</Button>
+                  </div>
+                </div>
+              ) : (
+                <Card.Text>"{comment.content}"</Card.Text>
+              )}
               <Card.Subtitle className="mb-2 text-muted">
                 - {comment.username}
               </Card.Subtitle>
@@ -114,38 +159,38 @@ export const MyComments = () => {
               </Card.Subtitle>
               <div className={styles.voteContainer}>
                 <div>
-              <img
-                className={styles.voteIcon}
-                alt="likeIcon"
-                src="/likeicon.webp"
-                onClick={(e) => {
-                  if (!commentUpDoot[comment.id]) {
-                    handleUpDootComment(comment.id);
-                    e.currentTarget.style.pointerEvents = "none";
-                    e.currentTarget.nextElementSibling.style.pointerEvents =
-                      "auto";
-                  }
-                }}
-              />
-              <img
-                className={styles.voteIcon}
-                alt="likeIcon"
-                src="/dislikev2.webp"
-                onClick={(e) => {
-                  if (!commentDownDoot[comment.id]) {
-                    handleDownDootComment(comment.id);
-                    e.currentTarget.style.pointerEvents = "none";
-                    e.currentTarget.previousElementSibling.style.pointerEvents =
-                      "auto";
-                  }
-                }}
-              />
+                  <img
+                    className={styles.voteIcon}
+                    alt="likeIcon"
+                    src="/likeicon.webp"
+                    onClick={(e) => {
+                      if (!commentUpDoot[comment.id]) {
+                        handleUpDootComment(comment.id);
+                        e.currentTarget.style.pointerEvents = "none";
+                        e.currentTarget.nextElementSibling.style.pointerEvents =
+                          "auto";
+                      }
+                    }}
+                  />
+                  <img
+                    className={styles.voteIcon}
+                    alt="dislikeIcon"
+                    src="/dislikev2.webp"
+                    onClick={(e) => {
+                      if (!commentDownDoot[comment.id]) {
+                        handleDownDootComment(comment.id);
+                        e.currentTarget.style.pointerEvents = "none";
+                        e.currentTarget.previousElementSibling.style.pointerEvents =
+                          "auto";
+                      }
+                    }}
+                  />
+                </div>
+                <div>
+                  <Button style={{ marginRight: "1rem" }} variant="info" onClick={() => handleEditComment(comment.id, comment.content)}>Edit</Button>
+                  <CloseButton onClick={() => handleDeleteComment(comment.id)} />
+                </div>
               </div>
-              <div>
-              <Button style={{marginRight: "1rem"}} variant="info">Edit</Button>
-                <CloseButton onClick={() => handleDeleteComment(comment.id)}/>
-                </div>
-                </div>
               <h6 id="responseStatusCommentDoot"></h6>
             </Card.Body>
           </Card>
@@ -154,3 +199,4 @@ export const MyComments = () => {
     </div>
   );
 };
+

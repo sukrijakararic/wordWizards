@@ -337,3 +337,20 @@ export const deleteComment = async (comment_id) => {
     throw error;
   }
 };
+
+export const updateComment = async (comment) => {
+  try {
+    const response = await fetch(`/api/editComment`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating comment:", error);
+    throw error;
+  }
+};
