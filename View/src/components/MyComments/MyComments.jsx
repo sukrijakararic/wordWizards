@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import styles from "./MyComments.module.css";
-import { getMyComments } from '../../utils/services';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { getMyComments } from "../../utils/services";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import { upDootComment, downDootComment } from "../../utils/services";
 
 export const MyComments = () => {
@@ -14,7 +14,7 @@ export const MyComments = () => {
     try {
       const comments = await getMyComments();
       setComments(comments);
-      console.log(comments)
+      console.log(comments);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
@@ -26,7 +26,8 @@ export const MyComments = () => {
       if (response.message === "Please log in to upDoot a comment") {
         document.getElementById("responseStatusCommentDoot").innerHTML =
           "please log in to upDoot a comment";
-        document.getElementById("responseStatusCommentDoot").style.color = "red";
+        document.getElementById("responseStatusCommentDoot").style.color =
+          "red";
         return;
       }
       setCommentUpDoot((prev) => ({ ...prev, [comment_id]: true }));
@@ -43,7 +44,8 @@ export const MyComments = () => {
       if (response.message === "Please log in to downDoot a comment") {
         document.getElementById("responseStatusCommentDoot").innerHTML =
           "please log in to downDoot a comment";
-        document.getElementById("responseStatusCommentDoot").style.color = "red";
+        document.getElementById("responseStatusCommentDoot").style.color =
+          "red";
         return;
       }
       setCommentDownDoot((prev) => ({ ...prev, [comment_id]: true }));
@@ -59,12 +61,12 @@ export const MyComments = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.myCommentsContainer}>
       {comments.message === "No comments found" ? (
         <h1 style={{ textAlign: "center" }}>No comments yet</h1>
       ) : (
         comments.map((comment) => (
-          <Card style={{ width: "18rem", margin: "1rem" }} key={comment.id}>
+          <Card key={comment.id} className={styles.myCommentCard}>
             <Card.Body>
               <Card.Text>- {comment.content}</Card.Text>
               <Card.Subtitle className="mb-2 text-muted">
@@ -74,24 +76,37 @@ export const MyComments = () => {
                 style={{ marginLeft: "5px" }}
                 className="mb-2 text-muted"
               >
-                {comment.updoots ? "upDoots: " + comment.updoots : "no upDoots yet"}
+                {comment.updoots
+                  ? "upDoots: " + comment.updoots
+                  : "no upDoots yet"}
               </Card.Subtitle>
-              <Button
-                style={{ marginRight: "10px", padding: "5px" }}
-                variant="success"
-                onClick={() => handleUpDootComment(comment.id)}
-                disabled={commentUpDoot[comment.id]}
-              >
-                upDoot
-              </Button>
-              <Button
-                style={{ padding: "5px" }}
-                variant="danger"
-                onClick={() => handleDownDootComment(comment.id)}
-                disabled={commentDownDoot[comment.id]}
-              >
-                downDoot
-              </Button>
+              <img
+                className={styles.voteIcon}
+                alt="likeIcon"
+                src="/likeicon.webp"
+                onClick={(e) => {
+                  if (!commentUpDoot[comment.id]) {
+                    handleUpDootComment(comment.id);
+                    e.currentTarget.style.pointerEvents = "none";
+                    e.currentTarget.nextElementSibling.style.pointerEvents =
+                      "auto";
+                  }
+                }}
+              />
+              <img
+                className={styles.voteIcon}
+                alt="likeIcon"
+                src="/dislike2.webp"
+                onClick={(e) => {
+                  if (!commentDownDoot[comment.id]) {
+                    handleDownDootComment(comment.id);
+                    e.currentTarget.style.pointerEvents = "none";
+                    e.currentTarget.previousElementSibling.style.pointerEvents =
+                      "auto";
+                  }
+                }}
+              />
+
               <h6 id="responseStatusCommentDoot"></h6>
             </Card.Body>
           </Card>
@@ -99,5 +114,4 @@ export const MyComments = () => {
       )}
     </div>
   );
-}
-
+};

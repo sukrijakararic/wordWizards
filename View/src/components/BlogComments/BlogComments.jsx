@@ -197,22 +197,32 @@ export const BlogComments = () => {
                   : "no upDoots yet"}
               </Card.Subtitle>
               <Card.Link></Card.Link>
-              <Button
-                style={{ marginRight: "10px", padding: "5px" }}
-                variant="success"
-                onClick={() => handleUpDootComment(comment.id)}
-                disabled={commentUpDoot[comment.id]}
-              >
-                upDoot
-              </Button>
-              <Button
-                style={{ padding: "5px" }}
-                variant="danger"
-                onClick={() => handleDownDootComment(comment.id)}
-                disabled={commentDownDoot[comment.id]}
-              >
-                downDoot
-              </Button>
+              <img
+                className={styles.voteIcon}
+                alt="likeIcon"
+                src="/likeicon.webp"
+                onClick={(e) => {
+                  if (!commentUpDoot[comment.id]) {
+                    handleUpDootComment(comment.id);
+                    e.currentTarget.style.pointerEvents = "none";
+                    e.currentTarget.nextElementSibling.style.pointerEvents =
+                      "auto";
+                  }
+                }}
+              />
+              <img
+                className={styles.voteIcon}
+                alt="likeIcon"
+                src="/dislike2.webp"
+                onClick={(e) => {
+                  if (!commentDownDoot[comment.id]) {
+                    handleDownDootComment(comment.id);
+                    e.currentTarget.style.pointerEvents = "none";
+                    e.currentTarget.previousElementSibling.style.pointerEvents =
+                      "auto";
+                  }
+                }}
+              />
             </Card.Body>
           </Card>
         ))

@@ -19,3 +19,13 @@
     margin: 1rem;
     text-align: center;
 }
+
+.voteIcon {
+    cursor: pointer;
+    height: 1.5rem;
+    margin: .5rem;
+  }
+
+  .voteIcon:active {
+    transform: scale(0.9);
+  }

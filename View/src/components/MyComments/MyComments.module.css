@@ -1,0 +1,30 @@
+.myCommentsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .myCommentCard {
+    width: 18rem;
+    background: beige;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    overflow: hidden;
+    margin: 1rem 0 1rem 0;
+    display: flex;
+  }
+
+  .myCommentCard:hover {
+    transform: scale(1.05);
+  }
+
+  .voteIcon {
+    cursor: pointer;
+    height: 1.5rem;
+    margin: .5rem;
+  }
+
+  .voteIcon:active {
+    transform: scale(0.9);
+  }
