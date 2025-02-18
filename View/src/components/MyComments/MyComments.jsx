@@ -68,15 +68,15 @@ export const MyComments = () => {
         comments.map((comment) => (
           <Card key={comment.id} className={styles.myCommentCard}>
             <Card.Body>
-              <Card.Text>- {comment.content}</Card.Text>
+              <Card.Text>{comment.content}</Card.Text>
               <Card.Subtitle className="mb-2 text-muted">
-                {comment.username}
+                - {comment.username}
               </Card.Subtitle>
               <Card.Subtitle
                 style={{ marginLeft: "5px" }}
                 className="mb-2 text-muted"
               >
-                {comment.updoots
+                - {comment.updoots
                   ? "upDoots: " + comment.updoots
                   : "no upDoots yet"}
               </Card.Subtitle>
@@ -96,7 +96,7 @@ export const MyComments = () => {
               <img
                 className={styles.voteIcon}
                 alt="likeIcon"
-                src="/dislike2.webp"
+                src="/dislikev2.webp"
                 onClick={(e) => {
                   if (!commentDownDoot[comment.id]) {
                     handleDownDootComment(comment.id);
