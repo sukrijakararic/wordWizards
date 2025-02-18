@@ -10,6 +10,7 @@ const userRouter = require("./Controller/userController");
 const blogsRouter = require("./Controller/blogsController");
 const commentRouter = require("./Controller/commentController");
 const googleRouter = require("./Controller/googleRouter");
+const path = require("path");
 
 app.use(express.json());
 app.use(cors());
@@ -35,11 +36,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("trust proxy", 1);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!, test, test");
-});
-
 app.use("/api", userRouter, blogsRouter, commentRouter, googleRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
